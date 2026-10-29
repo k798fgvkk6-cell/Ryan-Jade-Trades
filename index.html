@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RYAN JADE | Mechanical Trading Protocol & Discipline Mentorship</title>
+    <meta name="description" content="Institutional mechanical execution desk. 1 trade a day, strict 9:30 PM rule, 1:3 RRR focus, and systematic 20-trade audited discipline mentorship.">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        brand: ['Cinzel', 'serif'],
+                    },
+                    colors: {
+                        onyx: {
+                            950: '#050507',
+                            900: '#0b0c10',
+                            850: '#111217',
+                            800: '#171821',
+                            700: '#222330',
+                            600: '#323447'
+                        }
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f3f46;
+        }
+        .bg-grid-pattern {
+            background-size: 32px 32px;
+        }
+    </style>
+</head>
+<body class="bg-onyx-950 text-zinc-100 font-sans selection:bg-zinc-800 selection:text-white antialiased overflow-x-hidden">
+
+    <!-- Top Announcement Bar -->
+    <div class="w-full bg-onyx-900 border-b border-zinc-800/80 px-4 py-2 text-center text-xs tracking-wider uppercase font-mono text-zinc-400 flex flex-wrap items-center justify-center gap-3">
+        <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-semibold">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> NY SESSION PROTOCOL
+        </span>
+        <span class="hidden sm:inline text-zinc-300">Live 90-Min Private Diagnostic Slots Open for Booking</span>
+        <a href="#pricing" class="underline hover:text-white transition-colors duration-200">View Program Options &rarr;</a>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-onyx-950/90 border-b border-zinc-800/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex flex-col items-start group">
+                <span class="font-brand text-2xl font-black tracking-widest text-white group-hover:tracking-wider transition-all duration-300">
+                    RYAN JADE
+                </span>
+                <span class="font-mono text-[9px] tracking-[0.28em] text-zinc-500 uppercase -mt-1 group-hover:text-zinc-300 transition-colors">
+                    MECHANICAL DESK &bull; RJS
+                </span>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-7 text-xs lg:text-sm font-medium text-zinc-400">
+                <a href="#protocol" class="hover:text-white transition-colors duration-200">The 7-Step Protocol</a>
+                <a href="#curriculum" class="hover:text-white transition-colors duration-200">Phases 1 &amp; 2</a>
+                <a href="#audit" class="hover:text-white transition-colors duration-200">Student Logs</a>
+                <a href="#calculator" class="hover:text-white transition-colors duration-200">Risk Calculator</a>
+                <a href="#pricing" class="hover:text-white transition-colors duration-200">Pricing &amp; Options</a>
+                <a href="#faq" class="hover:text-white transition-colors duration-200">FAQ</a>
+            </nav>
+
+            <div class="flex items-center gap-2 sm:gap-3">
+                <button onclick="openPortalModal()" class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 text-xs font-mono tracking-wider uppercase text-zinc-300 hover:text-white bg-onyx-850 hover:bg-onyx-800 border border-zinc-700/60 rounded-lg transition-all duration-200 cursor-pointer">
+                    <i data-lucide="user-check" class="w-3.5 h-3.5 text-zinc-400"></i>
+                    <span>Portal Demo</span>
+                </button>
+                <button onclick="openEnrollModal('Full Mentorship')" class="inline-flex items-center justify-center px-4 sm:px-5 py-2.5 text-xs font-semibold tracking-wider uppercase text-black bg-white hover:bg-zinc-200 rounded-lg shadow-sm hover:shadow-white/20 transition-all duration-200 cursor-pointer">
+                    <span>Claim Your Slot</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative pt-16 pb-24 md:pt-24 md:pb-32 bg-grid-pattern overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(255,255,255,0.06),transparent_65%)] pointer-events-none"></div>
+
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <!-- Badges Bar -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-onyx-850/90 border border-zinc-700/70 text-xs font-mono text-zinc-300 mb-6 shadow-inner">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
+                    <span class="tracking-wide text-zinc-300">1 Trade A Day &bull; Strict 9:30 PM Rule &bull; 1:3 RRR Focus</span>
+                </div>
+
+                <!-- Live NY Countdown Widget -->
+                <div class="mb-8 inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-onyx-900/95 border border-zinc-800 backdrop-blur-md shadow-lg">
+                    <div class="flex items-center gap-2 text-xs font-mono text-zinc-400">
+                        <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-400"></i>
+                        <span class="hidden sm:inline">PHT Desk Time:</span>
+                        <span id="heroClock" class="text-white font-semibold">09:15:00 PM</span>
+                    </div>
+                    <span class="text-zinc-700">|</span>
+                    <div id="heroCountdownWrap" class="flex items-center gap-2 text-xs font-mono text-amber-300">
+                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                        <span>COUNTDOWN TO 9:30 PM: <strong id="heroCountdown" class="text-white font-mono">00h 15m 00s</strong></span>
+                    </div>
+                </div>
+
+                <!-- Main Heading -->
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-5xl mx-auto leading-[1.08] mb-6">
+                    Stop Overtrading.<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 via-zinc-300 to-zinc-600">
+                        Execute The 9:30 PM Rule.
+                    </span>
+                </h1>
+
+                <p class="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-zinc-400 font-normal leading-relaxed mb-10">
+                    A rule-based, institutional-grade mechanical execution protocol. Exactly <span class="text-zinc-200 font-semibold">one position per day</span>, zero chart sitting, and pure statistical clarity tailored for serious traders.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+                    <button onclick="openEnrollModal('Full Mentorship')" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-bold tracking-wider uppercase text-black bg-white hover:bg-zinc-200 rounded-xl shadow-lg hover:shadow-white/10 transition-all duration-300 cursor-pointer">
+                        <span>Enroll In Full Mentorship</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                    <a href="#pricing" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold tracking-wider uppercase text-zinc-300 bg-onyx-850 hover:bg-onyx-800 border border-zinc-700/70 hover:border-zinc-500 rounded-xl transition-all duration-300">
+                        <span>Explore Standalone Vault</span>
+                        <i data-lucide="video" class="w-4 h-4 text-zinc-400"></i>
+                    </a>
+                </div>
+
+                <div class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-onyx-900 border border-amber-500/30 text-xs font-mono text-amber-200/90 mb-16 max-w-2xl mx-auto text-left sm:text-center">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-amber-400 flex-shrink-0"></i>
+                    <span><strong class="text-amber-300">Mentorship Credit Guarantee:</strong> 100% of standalone vault spend is credited if you upgrade within 30 days.</span>
+                </div>
+
+                <!-- 4 Metrics Bar -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-left">
+                    <div class="p-5 rounded-2xl bg-onyx-900/90 border border-zinc-800/80 backdrop-blur-sm hover:border-zinc-700 transition-colors">
+                        <p class="text-xs font-mono uppercase text-zinc-500 tracking-wider">Trading Window</p>
+                        <p class="text-xl sm:text-2xl font-bold text-white mt-1">9:30 PM NY</p>
+                        <p class="text-[11px] text-zinc-400 mt-1">Strict open session trigger</p>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-onyx-900/90 border border-zinc-800/80 backdrop-blur-sm hover:border-zinc-700 transition-colors">
+                        <p class="text-xs font-mono uppercase text-zinc-500 tracking-wider">Daily Execution</p>
+                        <p class="text-xl sm:text-2xl font-bold text-white mt-1">1 Trade / Day</p>
+                        <p class="text-[11px] text-zinc-400 mt-1">1 position at a time only</p>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-onyx-900/90 border border-zinc-800/80 backdrop-blur-sm hover:border-zinc-700 transition-colors">
+                        <p class="text-xs font-mono uppercase text-zinc-500 tracking-wider">Target Reward</p>
+                        <p class="text-xl sm:text-2xl font-bold text-emerald-400 mt-1">1:3 RRR Focus</p>
+                        <p class="text-[11px] text-zinc-400 mt-1">1:1 on designated risk days</p>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-onyx-900/90 border border-zinc-800/80 backdrop-blur-sm hover:border-zinc-700 transition-colors">
+                        <p class="text-xs font-mono uppercase text-zinc-500 tracking-wider">Night Protocol</p>
+                        <p class="text-xl sm:text-2xl font-bold text-zinc-200 mt-1">2:00 AM Cutoff</p>
+                        <p class="text-[11px] text-zinc-400 mt-1">Breakeven or chart shutdown</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The 7-Step Protocol Walkthrough -->
+        <section id="protocol" class="py-24 border-t border-zinc-800/80 bg-onyx-900/40 relative">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-mono uppercase tracking-[0.25em] text-zinc-400">Mechanical Blueprint</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">
+                        The 7-Step Execution Sequence
+                    </h2>
+                    <p class="text-zinc-400 text-sm sm:text-base mt-3">
+                        We do not predict, guess, or hold open-ended hope. We follow a strict systematic order on every single execution. Click any step for detailed protocol schematics.
+                    </p>
+                </div>
+
+                <!-- Steps Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="protocolGrid">
+                    <!-- Step 1 -->
+                    <div onclick="selectStep(1)" id="stepCard-1" class="p-6 rounded-2xl bg-onyx-900 border border-white/80 shadow-lg shadow-white/5 ring-1 ring-white/30 transition-all duration-300 relative group cursor-pointer">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-white text-black flex items-center justify-center font-mono font-bold text-sm step-num">01</div>
+                            <span class="text-[10px] font-mono tracking-wider px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700">STRUCTURAL CONTEXT</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-zinc-100 group-hover:text-white transition-colors">Pre-Market Trendlines</h3>
+                        <p class="text-xs font-mono text-amber-400/90 mt-1">UP TO 9:30 PM (PHT / NY OPEN)</p>
+                        <p class="text-sm text-zinc-400 mt-3 leading-relaxed">Update all higher-timeframe trendlines, support &amp; resistance zones, and Forex Factory red-folder filters before session bell.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div onclick="selectStep(2)" id="stepCard-2" class="p-6 rounded-2xl bg-onyx-900 border border-zinc-800 hover:border-zinc-700 transition-all duration-300 relative group cursor-pointer">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-onyx-800 border border-zinc-700/80 text-white flex items-center justify-center font-mono font-bold text-sm step-num">02</div>
+                            <span class="text-[10px] font-mono tracking-wider px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700">LEVEL LOCK</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-zinc-100 group-hover:text-white transition-colors">Mark Session Levels</h3>
+                        <p class="text-xs font-mono text-amber-400/90 mt-1">EXACTLY AT 9:30 PM</p>
+                        <p class="text-sm text-zinc-400 mt-3 leading-relaxed">Pinpoint and lock the active Session High and Session Low on your TradingView layout. No trading prior to this timestamp.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div onclick="selectStep(3)" id="stepCard-3" class="p-6 rounded-2xl bg-onyx-900 border border-zinc-800 hover:border-zinc-700 transition-all duration-300 relative group cursor-pointer">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-onyx-800 border border-zinc-700/80 text-white flex items-center justify-center font-mono font-bold text-sm step-num">03</div>
+                            <span class="text-[10px] font-mono tracking-wider px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700">VOLUME CONFIRMATION</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-zinc-100 group-hover:text-white transition-colors">Wait for 15M Breakout</h3>
+                        <p class="text-xs font-mono text-amber-400/90 mt-1">STRUCTURAL EXPANSION</p>
+                        <p class="text-sm text-zinc-400 mt-3 leading-relaxed">Require a verified body close on the 15-Minute candle beyond marked session limits. Never front-run the momentum.</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div onclick="selectStep(4)" id="stepCard-4" class="p-6 rounded-2xl bg-onyx-900 border border-zinc-800 hover:border-zinc-700 transition-all duration-300 relative group cursor-pointer">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-onyx-800 border border-zinc-700/80 text-white flex items-center justify-center font-mono font-bold text-sm step-num">04</div>
+                            <span class="text-[10px] font-mono tracking-wider px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700">DISCIPLINE DRILL</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-zinc-100 group-hover:text-white transition-colors">Wait for the Pullback</h3>
+                        <p class="text-xs font-mono text-amber-400/90 mt-1">PATIENCE FILTER</p>
+                        <p class="text-sm text-zinc-400 mt-3 leading-relaxed">Chasing impulses is forbidden. Let price breathe and retrace back into historical support/resistance structure.</p>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div onclick="selectStep(5)" id="stepCard-5" class="p-6 rounded-2xl bg-onyx-900 border border-zinc-800 hover:border-zinc-700 transition-all duration-300 relative group cursor-pointer">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-onyx-800 border border-zinc-700/80 text-white flex items-center justify-center font-mono font-bold text-sm step-num">05</div>
+                            <span class="text-[10px] font-mono tracking-wider px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700">SNIPER CALIBRATION</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-zinc-100 group-hover:text-white transition-colors">Apply Fibonacci Tool</h3>
+                        <p class="text-xs font-mono text-amber-400/90 mt-1">CONFLUENCE ANCHOR</p>
+                        <p class="text-sm text-zinc-400 mt-3 leading-relaxed">Pull swing Fibonacci retracements to align your sniper entry, invalidation level, and target 1:3 mathematical trajectory.</p>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div onclick="selectStep(6)" id="stepCard-6" class="p-6 rounded-2xl bg-onyx-900 border border-zinc-800 hover:border-zinc-700 transition-all duration-300 relative group cursor-pointer">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-onyx-800 border border-zinc-700/80 text-white flex items-center justify-center font-mono font-bold text-sm step-num">06</div>
+                            <span class="text-[10px] font-mono tracking-wider px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700">CAPITAL PRESERVATION</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-zinc-100 group-hover:text-white transition-colors">Fixed SL &amp; Budget</h3>
+                        <p class="text-xs font-mono text-amber-400/90 mt-1">RISK GOVERNOR</p>
+                        <p class="text-sm text-zinc-400 mt-3 leading-relaxed">Calculate exact position lot size so your stop loss never exceeds your predetermined risk budget. Zero second-guessing.</p>
+                    </div>
+                </div>
+
+                <!-- Step 7 Highlight Banner -->
+                <div onclick="selectStep(7)" id="stepCard-7" class="mt-8 p-7 rounded-2xl bg-gradient-to-r from-onyx-900 via-onyx-850 to-onyx-900 border border-zinc-700/80 hover:border-zinc-500 transition-all duration-300 flex flex-col md:flex-row items-center justify-between gap-6 cursor-pointer">
+                    <div class="flex items-center gap-5">
+                        <div class="w-14 h-14 rounded-2xl bg-white text-black flex items-center justify-center font-mono font-black text-xl flex-shrink-0">
+                            07
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold">The Core Rule</span>
+                            <h4 class="text-xl font-bold text-white">Execute &amp; Close The Day</h4>
+                            <p class="text-sm text-zinc-400 mt-1">
+                                &bull; If Win: 1:3 RRR banked. Close charts.<br>
+                                &bull; If Loss: Invalidation triggered. Close charts and log it. We come back tomorrow.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 flex items-center gap-3">
+                        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-onyx-800 border border-zinc-700 text-xs font-mono text-zinc-300">
+                            <i data-lucide="lock" class="w-4 h-4 text-amber-400"></i>
+                            2:00 AM Breakeven Lockout Mandatory
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Interactive Step Inspector -->
+                <div class="mt-10 p-6 sm:p-8 rounded-3xl bg-[#07080b] border border-zinc-700/80 shadow-2xl relative font-sans">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 border-b border-zinc-800 gap-3">
+                        <div class="flex items-center gap-3">
+                            <span id="inspectStepBadge" class="px-2.5 py-1 rounded-lg bg-white/10 text-white font-mono font-bold text-xs">
+                                STEP 01 INSPECTION
+                            </span>
+                            <h4 id="inspectStepTitle" class="text-lg font-bold text-white">Pre-Market Trendlines</h4>
+                        </div>
+                        <span id="inspectStepTiming" class="text-xs font-mono text-zinc-400 bg-onyx-850 px-3 py-1 rounded-lg border border-zinc-800">
+                            Timing: UP TO 9:30 PM (PHT / NY OPEN)
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-xl bg-onyx-900 border border-zinc-800">
+                                <div class="flex items-center gap-2 text-xs font-mono text-zinc-400 mb-1">
+                                    <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i>
+                                    <span class="font-semibold uppercase text-zinc-300">Mandatory Rule</span>
+                                </div>
+                                <p id="inspectRule" class="text-sm text-zinc-300 leading-relaxed">Map 4H and 1H directional order flow. Do not place any market or pending orders prior to 9:30 PM.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-onyx-900 border border-zinc-800">
+                                <div class="flex items-center gap-2 text-xs font-mono text-zinc-400 mb-1">
+                                    <i data-lucide="eye" class="w-3.5 h-3.5 text-sky-400"></i>
+                                    <span class="font-semibold uppercase text-zinc-300">Operational Action</span>
+                                </div>
+                                <p id="inspectAction" class="text-sm text-zinc-300 leading-relaxed">Check Forex Factory for high-impact USD events. Mark previous day high (PDH) and previous day low (PDL).</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-xl bg-onyx-900 border border-zinc-800">
+                                <div class="flex items-center gap-2 text-xs font-mono text-zinc-400 mb-1">
+                                    <i data-lucide="alert-circle" class="w-3.5 h-3.5 text-amber-400"></i>
+                                    <span class="font-semibold uppercase text-zinc-300">Invalidation Threshold</span>
+                                </div>
+                                <p id="inspectInvalidation" class="text-sm text-zinc-300 leading-relaxed">If red-folder CPI or FOMC drops within 15 minutes of open, desk activates standby hold.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-[#140b0b] border border-red-900/40">
+                                <div class="flex items-center gap-2 text-xs font-mono text-red-400 mb-1">
+                                    <i data-lucide="x-circle" class="w-3.5 h-3.5 text-red-400"></i>
+                                    <span class="font-semibold uppercase text-red-300">Fatal Mistake to Avoid</span>
+                                </div>
+                                <p id="inspectMistake" class="text-sm text-red-200/90 leading-relaxed">Entering prematurely during Asian or London afternoon drift without New York volume.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Program Architecture: Phase 1 & Phase 2 Side by Side -->
+        <section id="curriculum" class="py-24 border-t border-zinc-800/80 bg-onyx-950">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-mono uppercase tracking-[0.25em] text-zinc-400">Curriculum Structure</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">
+                        Two Phases. Zero Ambiguity.
+                    </h2>
+                    <p class="text-zinc-400 text-sm sm:text-base mt-3">
+                        Progress through structured phase coverage and sequential modules to guarantee true operational competency before scaling capital.
+                    </p>
+                </div>
+
+                <!-- Two-Column Cards -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                    
+                    <!-- Phase 1 Card -->
+                    <div class="p-8 rounded-3xl bg-onyx-900 border border-zinc-800 flex flex-col justify-between relative overflow-hidden hover:border-zinc-700 transition-colors">
+                        <div class="absolute top-0 right-0 p-8 opacity-5 font-brand text-8xl font-black select-none pointer-events-none">
+                            P1
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 rounded-full text-xs font-mono tracking-wider uppercase bg-amber-500/10 text-amber-300 border border-amber-500/30">
+                                    Phase 01
+                                </span>
+                                <span class="text-xs font-mono text-zinc-500">Foundation &bull; 7 Modules</span>
+                            </div>
+
+                            <h3 class="text-2xl font-bold text-white">Discipline Building &amp; Mechanical Execution</h3>
+                            <p class="text-zinc-400 text-sm mt-2 leading-relaxed">
+                                Transforming discretionary gambling habits into mechanical, repeatable trading data through 1 trade/day discipline.
+                            </p>
+
+                            <!-- Module List -->
+                            <div class="mt-8 space-y-3 font-mono text-xs">
+                                <div onclick="openPortalModal('01')" class="p-3.5 rounded-xl bg-onyx-850 border border-zinc-800/80 hover:border-zinc-700 flex items-center justify-between transition-colors cursor-pointer group">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-6 h-6 rounded flex items-center justify-center text-[10px] font-bold bg-amber-500/10 text-amber-400 group-hover:text-amber-300 group-hover:bg-amber-500/20 transition-colors">01</span>
+                                        <span class="text-zinc-300 font-sans text-xs group-hover:text-white transition-colors">Phase 1 Start &amp; Rules</span>
+                                    </div>
+                                    <span class="text-zinc-400 text-[11px] font-mono tracking-tight">Phase Coverage</span>
+                                </div>
+                                <div onclick="openPortalModal('02')" class="p-3.5 rounded-xl bg-onyx-850 border border-zinc-800/80 hover:border-zinc-700 flex items-center justify-between transition-colors cursor-pointer group">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-6 h-6 rounded flex items-center justify-center text-[10px] font-bold bg-amber-500/10 text-amber-400 group-hover:text-amber-300 group-hover:bg-amber-500/20 transition-colors">02</span>
+                                        <span class="text-zinc-300 font-sans text-xs group-hover:text-white transition-colors">Objective &amp; Trader Identity</span>
+                                    </div>
+                                    <span class="text-zinc-400 text-[11px] font-mono tracking-tight">Phase Coverage</span>
+                                </div>
+                                <div onclick="openPortalModal('03')" class="p-3.5 rounded-xl bg-onyx-850 border border-zinc-800/80 hover:border-zinc-700 flex items-center justify-between transition-colors cursor-pointer group">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-6 h-6 rounded flex items-center justify-center text-[10px] font-bold bg-amber-500/10 text-amber-400 group-hover:text-amber-300 group-hover:bg-amber-500/20 transition-colors">03</span>
+                                        <span class="text-zinc-300 font-sans text-xs group-hover:text-white transition-colors">RJS Core System Mechanics</span>
+                                    </div>
+                                    <span class="text-zinc-400 text-[11px] font-mono tracking-tight">Phase Coverage</span>
+                                </div>
+                                <div onclick="openPortalModal('04')" class="p-3.5 rounded-xl bg-onyx-850 border border-zinc-800/80 hover:border-zinc-700 flex items-center justify-between transition-colors cursor-pointer group">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-6 h-6 rounded flex items-center justify-center text-[10px] font-bold bg-amber-500/10 text-amber-400 group-hover:text-amber-300 group-hover:bg-amber-500/20 transition-colors">04</span>
+                                        <span class="text-zinc-300 font-sans text-xs group-hover:text-white transition-colors">Forex Factory News Filtering</span>
+                                    </div>
+                                    <span class="text-zinc-400 text-[11px] font-mono tracking-tight">Phase Coverage</span>
+                                </div>
+                                <div onclick="openPortalModal('05')" class="p-3.5 rounded-xl bg-onyx-850 border border-zinc-800/80 hover:border-zinc-700 flex items-center justify-between transition-colors cursor-pointer group">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-6 h-6 rounded flex items-center justify-center text-[10px] font-bold bg-amber-500/10 text-amber-400 group-hover:text-amber-300 group-hover:bg-amber-500/20 transition-colors">05</span>
+                                        <span class="text-zinc-300 font-sans text-xs group-hover:text-white transition-colors">Masterclass: Power of Fibonacci</span>
+                                    </div>
+                                    <span class="text-zinc-400 text-[11px] font-mono tracking-tight">Phase Coverage</span>
+                                </div>
+                                <div onclick="openPortalModal('06')" class="p-3.5 rounded-xl bg-onyx-850 border border-zinc-800/80 hover:border-zinc-700 flex items-center justify-between transition-colors cursor-pointer group">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-6 h-6 rounded flex items-center justify-center text-[10px] font-bold bg-amber-500/10 text-amber-400 group-hover:text-amber-300 group-hover:bg-amber-500/20 transition-colors">06</span>
+                                        <span class="text-zinc-300 font-sans text-xs group-hover:text-white transition-colors">Masterclass: Psychology of TP</span>
+                                    </div>
+                                    <span class="text-zinc-400 text-[11px] font-mono tracking-tight">Phase Coverage</span>
+                                </div>
+                                <div onclick="openPortalModal('07')" class="p-3.5 rounded-xl bg-onyx-850 border border-zinc-800/80 hover:border-zinc-700 flex items-center justify-between transition-colors cursor-pointer group">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-6 h-6 rounded flex items-center justify-center text-[10px] font-bold bg-amber-500/10 text-amber-400 group-hover:text-amber-300 group-hover:bg-amber-500/20 transition-colors">07</span>
+                                        <span class="text-zinc-300 font-sans text-xs group-hover:text-white transition-colors">Masterclass: Psychology of SL</span>
+                                    </div>
+                                    <span class="text-zinc-400 text-[11px] font-mono tracking-tight">Phase Coverage</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Call 1 Inclusion Note -->
+                        <div class="mt-8 pt-6 border-t border-zinc-800/80 flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="phone-call" class="w-5 h-5"></i>
+                            </div>
+                            <p class="text-xs text-zinc-300">
+                                <strong class="text-white block font-sans text-sm">Includes 1st 90-Min Private Call (Full Program):</strong>
+                                <span>Diagnostic review of your 20-trade journal &amp; mechanical audit with Ryan Jade.</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Phase 2 Card -->
+                    <div class="p-8 rounded-3xl bg-onyx-900 border border-zinc-800 flex flex-col justify-between relative overflow-hidden hover:border-zinc-700 transition-colors">
+                        <div class="absolute top-0 right-0 p-8 opacity-5 font-brand text-8xl font-black select-none pointer-events-none">
+                            P2
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 rounded-full text-xs font-mono tracking-wider uppercase bg-amber-500/10 text-amber-300 border border-amber-500/30">
+                                    Phase 02
+                                </span>
+                                <span class="text-xs font-mono text-zinc-500">Advanced Swing &bull; High RRR</span>
+                            </div>
+
+                            <h3 class="text-2xl font-bold text-white">Swing Execution &amp; Scale Systems</h3>
+                            <p class="text-zinc-400 text-sm mt-2 leading-relaxed">
+                                Expanding your mechanical edge into swing POIs, structural liquidity, and maximizing 1:4 and 1:5 asymmetrical setups.
+                            </p>
+
+                            <!-- Module List -->
+                            <div class="mt-8 space-y-3 font-mono text-xs">
+                                <div onclick="openPortalModal('01')" class="p-3.5 rounded-xl bg-onyx-850 border border-zinc-800/80 hover:border-zinc-700 flex items-center justify-between transition-colors cursor-pointer group">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-6 h-6 rounded flex items-center justify-center text-[10px] font-bold bg-amber-500/10 text-amber-400 group-hover:text-amber-300 group-hover:bg-amber-500/20 transition-colors">01</span>
+                                        <span class="text-zinc-300 font-sans text-xs group-hover:text-white transition-colors">Advanced Points of Interest (POIs)</span>
+                                    </div>
+                                    <span class="text-zinc-400 text-[11px] font-mono tracking-tight">Phase Coverage</span>
+                                </div>
+                                <div onclick="openPortalModal('02')" class="p-3.5 rounded-xl bg-onyx-850 border border-zinc-800/80 hover:border-zinc-700 flex items-center justify-between transition-colors cursor-pointer group">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-6 h-6 rounded flex items-center justify-center text-[10px] font-bold bg-amber-500/10 text-amber-400 group-hover:text-amber-300 group-hover:bg-amber-500/20 transition-colors">02</span>
+                                        <span class="text-zinc-300 font-sans text-xs group-hover:text-white transition-colors">Higher Timeframe S&amp;R Integration</span>
+                                    </div>
+                                    <span class="text-zinc-400 text-[11px] font-mono tracking-tight">Phase Coverage</span>
+                                </div>
+                                <div onclick="openPortalModal('03')" class="p-3.5 rounded-xl bg-onyx-850 border border-zinc-800/80 hover:border-zinc-700 flex items-center justify-between transition-colors cursor-pointer group">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-6 h-6 rounded flex items-center justify-center text-[10px] font-bold bg-amber-500/10 text-amber-400 group-hover:text-amber-300 group-hover:bg-amber-500/20 transition-colors">03</span>
+                                        <span class="text-zinc-300 font-sans text-xs group-hover:text-white transition-colors">1:4 to 1:5 Asymmetrical RRR Setups</span>
+                                    </div>
+                                    <span class="text-zinc-400 text-[11px] font-mono tracking-tight">Phase Coverage</span>
+                                </div>
+                                <div onclick="openPortalModal('04')" class="p-3.5 rounded-xl bg-onyx-850 border border-zinc-800/80 hover:border-zinc-700 flex items-center justify-between transition-colors cursor-pointer group">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-6 h-6 rounded flex items-center justify-center text-[10px] font-bold bg-amber-500/10 text-amber-400 group-hover:text-amber-300 group-hover:bg-amber-500/20 transition-colors">04</span>
+                                        <span class="text-zinc-300 font-sans text-xs group-hover:text-white transition-colors">Session Sweep &amp; Liquidity Pulls</span>
+                                    </div>
+                                    <span class="text-zinc-400 text-[11px] font-mono tracking-tight">Phase Coverage</span>
+                                </div>
+                                <div onclick="openPortalModal('05')" class="p-3.5 rounded-xl bg-onyx-850 border border-zinc-800/80 hover:border-zinc-700 flex items-center justify-between transition-colors cursor-pointer group">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-6 h-6 rounded flex items-center justify-center text-[10px] font-bold bg-amber-500/10 text-amber-400 group-hover:text-amber-300 group-hover:bg-amber-500/20 transition-colors">05</span>
+                                        <span class="text-zinc-300 font-sans text-xs group-hover:text-white transition-colors">Multi-Position Runner Management</span>
+                                    </div>
+                                    <span class="text-zinc-400 text-[11px] font-mono tracking-tight">Phase Coverage</span>
+                                </div>
+                                <div onclick="openPortalModal('06')" class="p-3.5 rounded-xl bg-onyx-850 border border-zinc-800/80 hover:border-zinc-700 flex items-center justify-between transition-colors cursor-pointer group">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-6 h-6 rounded flex items-center justify-center text-[10px] font-bold bg-amber-500/10 text-amber-400 group-hover:text-amber-300 group-hover:bg-amber-500/20 transition-colors">06</span>
+                                        <span class="text-zinc-300 font-sans text-xs group-hover:text-white transition-colors">10-Trade Phase 2 Audit Sequence</span>
+                                    </div>
+                                    <span class="text-zinc-400 text-[11px] font-mono tracking-tight">Phase Coverage</span>
+                                </div>
+                                <div onclick="openPortalModal('07')" class="p-3.5 rounded-xl bg-onyx-850 border border-zinc-800/80 hover:border-zinc-700 flex items-center justify-between transition-colors cursor-pointer group">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-6 h-6 rounded flex items-center justify-center text-[10px] font-bold bg-amber-500/10 text-amber-400 group-hover:text-amber-300 group-hover:bg-amber-500/20 transition-colors">07</span>
+                                        <span class="text-zinc-300 font-sans text-xs group-hover:text-white transition-colors">Institutional Independence Setup</span>
+                                    </div>
+                                    <span class="text-zinc-400 text-[11px] font-mono tracking-tight">Phase Coverage</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Call 2 Inclusion Note -->
+                        <div class="mt-8 pt-6 border-t border-zinc-800/80 flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="award" class="w-5 h-5"></i>
+                            </div>
+                            <p class="text-xs text-zinc-300">
+                                <strong class="text-white block font-sans text-sm">Includes 2nd 90-Min Private Call (Full Program):</strong>
+                                <span>Advanced capital scale roadmap, prop firm audit prep, and long-term trajectory.</span>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Student Audit & Execution Log Showcase -->
+        <section id="audit" class="py-24 border-t border-zinc-800/80 bg-onyx-900/30">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row items-start lg:items-center gap-12">
+                    
+                    <div class="w-full lg:w-1/2">
+                        <span class="text-xs font-mono uppercase tracking-[0.25em] text-zinc-400">Accountability System</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 leading-tight">
+                            No Guesswork.<br>Every Single Trade Is Audited.
+                        </h2>
+                        <p class="text-zinc-400 text-sm sm:text-base mt-4 leading-relaxed">
+                            Students receive custom interactive fillable PDFs. You don't just "watch" lessons—you input live execution metrics, submit verification keywords, and prove mechanical obedience before unlocking higher stages.
+                        </p>
+
+                        <div class="mt-8 space-y-4 font-sans">
+                            <div class="flex items-start gap-3.5">
+                                <div class="w-6 h-6 rounded-md bg-zinc-800 text-zinc-200 flex items-center justify-center text-xs mt-0.5 flex-shrink-0">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">Fillable 20-Trade Execution Journal</h4>
+                                    <p class="text-xs text-zinc-400 mt-0.5">Interactive digital PDF tracking 100% of entries, fixed SL, TP, and RRR compliance.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3.5">
+                                <div class="w-6 h-6 rounded-md bg-zinc-800 text-zinc-200 flex items-center justify-center text-xs mt-0.5 flex-shrink-0">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">Secret Single-Word Verification Keying</h4>
+                                    <p class="text-xs text-zinc-400 mt-0.5">Each video module contains a secret keyword to confirm 100% curriculum completion.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3.5">
+                                <div class="w-6 h-6 rounded-md bg-zinc-800 text-zinc-200 flex items-center justify-center text-xs mt-0.5 flex-shrink-0">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">Weekly Forex Factory Risk Clearances</h4>
+                                    <p class="text-xs text-zinc-400 mt-0.5">Standardized weekly protocol PDFs telling you explicitly: Tradable, Caution, or Stand-Down.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex flex-wrap items-center gap-3 font-mono text-xs">
+                            <button onclick="toggleAddTradeForm()" class="px-4 py-2.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-bold flex items-center gap-1.5 cursor-pointer">
+                                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                                <span>Simulate Logging Trade</span>
+                            </button>
+                            <button onclick="resetTrades()" class="px-3.5 py-2.5 rounded-xl bg-onyx-850 hover:bg-onyx-800 border border-zinc-700 text-zinc-400 hover:text-white flex items-center gap-1.5 cursor-pointer">
+                                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                                <span>Reset Sample Data</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Sheet Mockup -->
+                    <div class="w-full lg:w-1/2">
+                        <div class="p-6 sm:p-7 rounded-3xl bg-onyx-950 border border-zinc-700/80 shadow-2xl relative font-mono text-xs">
+                            <div class="flex items-center justify-between pb-4 border-b border-zinc-800">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+                                    <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+                                    <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
+                                    <span class="ml-2 text-zinc-300 font-bold text-[11px] tracking-wider">RJS_EXECUTION_AUDIT.PDF</span>
+                                </div>
+                                <span class="text-emerald-400 text-[10px] bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 font-semibold">
+                                    LIVE AUDIT COMPLIANT
+                                </span>
+                            </div>
+
+                            <!-- Add Trade Inline Form -->
+                            <div id="addTradeBox" class="hidden my-4 p-4 rounded-xl bg-onyx-850 border border-zinc-700 space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-white font-bold text-[11px]">Log New Mechanical Trade</span>
+                                    <button type="button" onclick="toggleAddTradeForm()" class="text-zinc-500 hover:text-white">&times;</button>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <div>
+                                        <label class="text-[10px] text-zinc-400 block mb-1">PAIR</label>
+                                        <select id="newTradePair" class="w-full bg-onyx-900 border border-zinc-700 rounded px-2 py-1.5 text-white">
+                                            <option value="EURUSD">EURUSD</option>
+                                            <option value="GBPUSD">GBPUSD</option>
+                                            <option value="USDJPY">USDJPY</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="text-[10px] text-zinc-400 block mb-1">DIRECTION</label>
+                                        <select id="newTradeDir" class="w-full bg-onyx-900 border border-zinc-700 rounded px-2 py-1.5 text-white">
+                                            <option value="BUY">BUY</option>
+                                            <option value="SELL">SELL</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="text-[10px] text-zinc-400 block mb-1">OUTCOME</label>
+                                        <select id="newTradeResult" class="w-full bg-onyx-900 border border-zinc-700 rounded px-2 py-1.5 text-white">
+                                            <option value="TP_HIT">TP HIT (+3.0R)</option>
+                                            <option value="SL_HIT">SL HIT (-1.0R)</option>
+                                            <option value="BE_HIT">BE HIT (0.0R)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="button" onclick="submitTrade()" class="w-full py-2 bg-emerald-500 hover:bg-emerald-600 text-black font-bold text-[11px] rounded uppercase cursor-pointer">
+                                    Commit Trade To Audit Record
+                                </button>
+                            </div>
+
+                            <!-- Trade Table Rows -->
+                            <div class="mt-4 space-y-2 max-h-[290px] overflow-y-auto pr-1" id="tradeRowsContainer">
+                                <!-- Populated dynamically by JS -->
+                            </div>
+
+                            <div class="mt-6 p-4 rounded-xl bg-onyx-900 border border-zinc-800 text-[11px] text-zinc-400 flex flex-wrap items-center justify-between gap-3">
+                                <div class="flex items-center gap-4">
+                                    <span>LOGGED: <strong id="loggedCount" class="text-white">7 / 20 TRADES</strong></span>
+                                    <span>WIN RATE: <strong id="loggedWinRate" class="text-white">71%</strong></span>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <span>NET P&amp;L: <strong id="loggedNetR" class="font-mono text-emerald-400">+10.0R</strong></span>
+                                    <span>COMPLIANCE: <strong class="text-emerald-400">100%</strong></span>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 text-[10px] text-zinc-500 text-center flex items-center justify-center gap-1.5">
+                                <i data-lucide="shield" class="w-3.5 h-3.5 text-zinc-400"></i>
+                                <span>Audit required prior to booking Private 1-on-1 Diagnostic Call #1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Mechanical Position Sizing & 1:3 RRR Calculator -->
+        <section id="calculator" class="py-24 border-t border-zinc-800/80 bg-onyx-950">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-mono uppercase tracking-[0.25em] text-zinc-400">Institutional Risk Management</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">
+                        Mechanical Position Sizing &amp; 1:3 RRR Calculator
+                    </h2>
+                    <p class="text-zinc-400 text-sm sm:text-base mt-3">
+                        In mechanical trading, guessing your lot size is an immediate disqualification. Calculate your exact lot size and 1:3 risk-to-reward parameters before the 9:30 PM bell.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-5xl mx-auto">
+                    <!-- Inputs -->
+                    <div class="lg:col-span-6 p-6 sm:p-8 rounded-3xl bg-onyx-900 border border-zinc-800 space-y-6">
+                        <div class="flex items-center justify-between pb-4 border-b border-zinc-800">
+                            <span class="font-mono text-xs uppercase text-zinc-400 font-semibold flex items-center gap-2">
+                                <i data-lucide="calculator" class="w-4 h-4 text-amber-400"></i> Input Parameters
+                            </span>
+                            <span class="text-[11px] font-mono text-zinc-500">Step 06 Protocol</span>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-mono mb-2">
+                                <label class="text-zinc-400">ACCOUNT CAPITAL / PROP BALANCE</label>
+                                <span id="balanceDisplay" class="text-white font-bold">$50,000</span>
+                            </div>
+                            <div class="grid grid-cols-4 gap-2 mb-2">
+                                <button type="button" onclick="setBalance(10000)" class="py-1.5 px-2 rounded-lg text-xs font-mono bg-onyx-800 text-zinc-400 hover:text-white border border-zinc-800">$10k</button>
+                                <button type="button" onclick="setBalance(25000)" class="py-1.5 px-2 rounded-lg text-xs font-mono bg-onyx-800 text-zinc-400 hover:text-white border border-zinc-800">$25k</button>
+                                <button type="button" onclick="setBalance(50000)" class="py-1.5 px-2 rounded-lg text-xs font-mono bg-white text-black font-bold">$50k</button>
+                                <button type="button" onclick="setBalance(100000)" class="py-1.5 px-2 rounded-lg text-xs font-mono bg-onyx-800 text-zinc-400 hover:text-white border border-zinc-800">$100k</button>
+                            </div>
+                            <input type="range" id="balanceSlider" min="1000" max="200000" step="1000" value="50000" oninput="calcRisk()" class="w-full accent-white cursor-pointer">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-mono mb-2">
+                                <label class="text-zinc-400">RISK PER TRADE (%)</label>
+                                <span id="riskPercentDisplay" class="text-white font-bold">1.0%</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button type="button" onclick="setRiskPercent(0.5)" class="py-2 px-3 rounded-xl text-xs font-mono bg-onyx-800 text-zinc-400 hover:text-white border border-zinc-800">0.5% Risk</button>
+                                <button type="button" onclick="setRiskPercent(1.0)" class="py-2 px-3 rounded-xl text-xs font-mono bg-amber-400 text-black font-bold">1.0% Risk</button>
+                                <button type="button" onclick="setRiskPercent(2.0)" class="py-2 px-3 rounded-xl text-xs font-mono bg-onyx-800 text-zinc-400 hover:text-white border border-zinc-800">2.0% Risk</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-mono mb-2">
+                                <label class="text-zinc-400">STOP LOSS DISTANCE (PIPS)</label>
+                                <span id="slPipsDisplay" class="text-white font-bold">12 Pips</span>
+                            </div>
+                            <input type="range" id="slPipsSlider" min="5" max="35" value="12" oninput="calcRisk()" class="w-full accent-amber-400 cursor-pointer">
+                            <div class="flex justify-between text-[10px] font-mono text-zinc-500 mt-1">
+                                <span>Tight (5 pips)</span>
+                                <span>Standard RJS (10-15 pips)</span>
+                                <span>Wide (35 pips)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Outputs -->
+                    <div class="lg:col-span-6 p-6 sm:p-8 rounded-3xl bg-onyx-900 border-2 border-zinc-700/80 shadow-2xl space-y-6">
+                        <div class="flex items-center justify-between pb-4 border-b border-zinc-800">
+                            <span class="font-mono text-xs uppercase text-emerald-400 font-semibold flex items-center gap-1.5">
+                                <i data-lucide="shield-check" class="w-4 h-4"></i> Execution Clearance Output
+                            </span>
+                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                                100% CAPITAL PROTECTED
+                            </span>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-onyx-850 border border-zinc-700/80 text-center">
+                            <span class="text-xs font-mono text-zinc-400 uppercase tracking-widest">Calculated Order Lot Size</span>
+                            <div class="text-4xl sm:text-5xl font-black font-mono text-white mt-1">
+                                <span id="outLotSize">4.17</span> <span class="text-lg font-normal text-zinc-400">LOTS</span>
+                            </div>
+                            <p class="text-[11px] font-mono text-zinc-400 mt-2">
+                                Exact sizing required for EURUSD at <span id="outPipsPill">12</span> pips invalidation.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 font-mono text-xs">
+                            <div class="p-4 rounded-xl bg-onyx-950 border border-zinc-800">
+                                <span class="text-zinc-500 text-[10px] block uppercase">Max Loss Budget (-1R)</span>
+                                <span id="outMaxLoss" class="text-lg font-bold text-red-400 mt-1 block">-$500.00</span>
+                                <span class="text-[10px] text-zinc-500">Fixed risk quota</span>
+                            </div>
+                            <div class="p-4 rounded-xl bg-onyx-950 border border-zinc-800">
+                                <span class="text-zinc-500 text-[10px] block uppercase">Target Reward (+3R)</span>
+                                <span id="outTargetReward" class="text-lg font-bold text-emerald-400 mt-1 block">+$1,500.00</span>
+                                <span id="outTargetPips" class="text-[10px] text-zinc-500">36 Pips Target</span>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-[#14120a] border border-amber-500/30 text-xs font-sans text-amber-200/90 leading-relaxed flex items-start gap-2.5">
+                            <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5"></i>
+                            <span><strong>Ryan Jade Execution Rule:</strong> Pre-fill your take profit at <strong>+3R</strong>. If price reaches 1:1, adjust Stop Loss to Breakeven (0R). At 2:00 AM PHT, mandatory shutdown applies.</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Weekly Forex Factory Clearance Schedule -->
+        <section class="py-20 border-t border-zinc-800/80 bg-onyx-900/20">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                    <div>
+                        <span class="text-xs font-mono uppercase tracking-[0.25em] text-zinc-400">Forex Factory Clearance Protocol</span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Weekly Red-Folder Risk Schedule</h2>
+                        <p class="text-zinc-400 text-sm mt-2 max-w-xl">Every Sunday evening, the desk issues standard directives. Traders never guess whether a session is tradable or protected by a Stand Down order.</p>
+                    </div>
+                    <div class="flex items-center gap-3 font-mono text-xs text-zinc-400">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Tradable (1:3 RRR)</span>
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-300 border border-amber-500/20">1:1 BE Lock</span>
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-red-500/10 text-red-400 border border-red-500/20">Stand Down</span>
+                    </div>
+                </div>
+
+                <div class="space-y-3 font-mono text-xs">
+                    <div class="p-4 sm:p-5 rounded-2xl border bg-onyx-900 border-zinc-800 hover:border-zinc-700 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 text-center"><span class="block text-white font-bold text-sm">MON</span><span class="block text-[10px] text-zinc-500">OCT 26</span></div>
+                            <div class="h-8 w-px bg-zinc-800 hidden sm:block"></div>
+                            <div>
+                                <div class="flex items-center gap-2"><span class="text-[11px] text-zinc-400">10:00 PM PHT</span><span class="text-[9px] px-1.5 py-0.5 rounded font-bold uppercase bg-amber-500/20 text-amber-300">MEDIUM IMPACT</span></div>
+                                <h4 class="text-sm font-sans font-bold text-white mt-0.5">US ISM Manufacturing PMI</h4>
+                            </div>
+                        </div>
+                        <div class="flex flex-col sm:items-end w-full sm:w-auto">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase mb-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">DESK TRADABLE (1:3 RRR)</span>
+                            <span class="text-[11px] text-zinc-400 font-sans">Normal 9:30 PM execution. Maintain standard 1:3 RRR target.</span>
+                        </div>
+                    </div>
+                    <div class="p-4 sm:p-5 rounded-2xl border bg-onyx-900 border-zinc-800 hover:border-zinc-700 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 text-center"><span class="block text-white font-bold text-sm">WED</span><span class="block text-[10px] text-zinc-500">OCT 28</span></div>
+                            <div class="h-8 w-px bg-zinc-800 hidden sm:block"></div>
+                            <div>
+                                <div class="flex items-center gap-2"><span class="text-[11px] text-zinc-400">8:15 PM PHT</span><span class="text-[9px] px-1.5 py-0.5 rounded font-bold uppercase bg-red-500/20 text-red-400 border border-red-500/30">HIGH IMPACT</span></div>
+                                <h4 class="text-sm font-sans font-bold text-white mt-0.5">US ADP Non-Farm Employment</h4>
+                            </div>
+                        </div>
+                        <div class="flex flex-col sm:items-end w-full sm:w-auto">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase mb-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">DESK TRADABLE (1:3 RRR)</span>
+                            <span class="text-[11px] text-zinc-400 font-sans">News drops 75 mins prior to NY Open. Levels will be calibrated by 9:30 PM.</span>
+                        </div>
+                    </div>
+                    <div class="p-4 sm:p-5 rounded-2xl border bg-[#161208] border-amber-800/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 text-center"><span class="block text-white font-bold text-sm">THU</span><span class="block text-[10px] text-zinc-500">OCT 29</span></div>
+                            <div class="h-8 w-px bg-zinc-800 hidden sm:block"></div>
+                            <div>
+                                <div class="flex items-center gap-2"><span class="text-[11px] text-zinc-400">8:30 PM PHT</span><span class="text-[9px] px-1.5 py-0.5 rounded font-bold uppercase bg-red-500/20 text-red-400 border border-red-500/30">HIGH IMPACT</span></div>
+                                <h4 class="text-sm font-sans font-bold text-white mt-0.5">US Core PCE Price Index (Red Folder)</h4>
+                            </div>
+                        </div>
+                        <div class="flex flex-col sm:items-end w-full sm:w-auto">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase mb-1 bg-amber-500/10 text-amber-300 border border-amber-500/30">CAUTION: 1:1 TP / BE LOCK</span>
+                            <span class="text-[11px] text-zinc-400 font-sans">Red folder release. Tighten SL, lock Breakeven at 1:1, or Stand Down.</span>
+                        </div>
+                    </div>
+                    <div class="p-4 sm:p-5 rounded-2xl border bg-[#150a0a] border-red-900/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 text-center"><span class="block text-white font-bold text-sm">FRI</span><span class="block text-[10px] text-zinc-500">OCT 30</span></div>
+                            <div class="h-8 w-px bg-zinc-800 hidden sm:block"></div>
+                            <div>
+                                <div class="flex items-center gap-2"><span class="text-[11px] text-zinc-400">8:30 PM PHT</span><span class="text-[9px] px-1.5 py-0.5 rounded font-bold uppercase bg-red-500/20 text-red-400 border border-red-500/30">HIGH IMPACT</span></div>
+                                <h4 class="text-sm font-sans font-bold text-white mt-0.5">US Non-Farm Payrolls (NFP) &amp; Unemployment</h4>
+                            </div>
+                        </div>
+                        <div class="flex flex-col sm:items-end w-full sm:w-auto">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase mb-1 bg-red-500/10 text-red-400 border border-red-500/30">STAND DOWN / NO TRADE</span>
+                            <span class="text-[11px] text-zinc-400 font-sans">EXTREME VOLATILITY. Desk Stand Down mandated. Zero executions.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing & Program Options Comparison -->
+        <section id="pricing" class="py-24 border-t border-zinc-800/80 bg-onyx-950 relative">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-mono uppercase tracking-[0.25em] text-zinc-400">Investment Options</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">One Program. Two Ways To Join.</h2>
+                    <p class="text-zinc-400 text-sm sm:text-base mt-3">Choose between 100% self-study in the standalone video vault or complete 1-on-1 diagnostic mentorship with Ryan Jade.</p>
+
+                    <!-- Currency Switcher -->
+                    <div class="inline-flex items-center gap-1 p-1 rounded-xl bg-onyx-900 border border-zinc-800 mt-6 text-xs font-mono">
+                        <button id="btnPhp" onclick="setCurrency('PHP')" class="px-4 py-1.5 rounded-lg bg-white text-black font-bold transition-all cursor-pointer">
+                            PHP (&#8369;)
+                        </button>
+                        <button id="btnUsd" onclick="setCurrency('USD')" class="px-4 py-1.5 rounded-lg text-zinc-400 hover:text-white font-medium transition-all cursor-pointer">
+                            USD ($)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Two Pricing Cards -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                    
+                    <!-- Option 02: Standalone Vault -->
+                    <div id="standalone" class="p-8 sm:p-10 rounded-3xl bg-onyx-900 border border-zinc-800 flex flex-col justify-between hover:border-zinc-700 transition-all duration-300">
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold">Option 02</span>
+                                <span class="px-3 py-1 rounded-full text-[11px] font-mono bg-zinc-800 text-zinc-300 border border-zinc-700">SELF-STUDY VAULT</span>
+                            </div>
+                            <h3 class="text-2xl sm:text-3xl font-extrabold text-white mt-3">Standalone Video Vault</h3>
+                            <p class="text-zinc-400 text-sm mt-2 leading-relaxed">Direct, self-paced access to both Phase 1 and Phase 2 curriculum, fillable worksheets, and execution logs.</p>
+
+                            <div class="mt-6 mb-8">
+                                <div class="flex items-baseline gap-2">
+                                    <span id="priceStandalone" class="text-4xl sm:text-5xl font-black text-white font-mono">&#8369;4,999</span>
+                                    <span class="text-zinc-400 text-xs font-mono">ONE-TIME ACCESS</span>
+                                </div>
+                                <p class="text-[12px] text-zinc-500 font-mono mt-1">Lifetime updates &bull; No recurring subscription</p>
+                            </div>
+
+                            <div class="space-y-3.5 text-sm">
+                                <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-zinc-300 flex-shrink-0"></i><span class="text-zinc-300">Phase 1 Complete Foundation Video Vault (7 Lessons)</span></div>
+                                <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-zinc-300 flex-shrink-0"></i><span class="text-zinc-300">Phase 2 Advanced Swing &amp; High RRR Vault (7 Lessons)</span></div>
+                                <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-zinc-300 flex-shrink-0"></i><span class="text-zinc-300">Interactive 20-Trade Fillable PDF Execution Sheet</span></div>
+                                <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-zinc-300 flex-shrink-0"></i><span class="text-zinc-300">Secret Single-Word Verification Checklists</span></div>
+                                <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-zinc-300 flex-shrink-0"></i><span class="text-zinc-300">Weekly Forex Factory Risk Mitigation Rules</span></div>
+                                <div class="flex items-center gap-3 opacity-40"><i data-lucide="x" class="w-4 h-4 text-zinc-600 flex-shrink-0"></i><span class="text-zinc-500 line-through">Two 90-Minute 1-on-1 Private Calls</span></div>
+                                <div class="flex items-center gap-3 opacity-40"><i data-lucide="x" class="w-4 h-4 text-zinc-600 flex-shrink-0"></i><span class="text-zinc-500 line-through">1-Month Daily Tradable Chart Markups</span></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-10 pt-6 border-t border-zinc-800">
+                            <div class="p-3.5 rounded-xl bg-onyx-850 border border-zinc-700/60 text-xs text-zinc-300 mb-6">
+                                <span class="text-amber-400 font-bold">100% Credit Clause:</span> If you decide to upgrade to Full Mentorship within 30 days, 100% of this fee is deducted!
+                            </div>
+                            <button onclick="openEnrollModal('Standalone Vault')" class="w-full py-4 text-xs font-bold tracking-wider uppercase text-zinc-200 bg-onyx-800 hover:bg-onyx-700 border border-zinc-700 hover:border-zinc-500 rounded-xl transition-all duration-200 cursor-pointer">
+                                Instant Access To Vault (<span class="priceStandaloneBtn">&#8369;4,999</span>)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Option 01: Full Mentorship -->
+                    <div class="p-8 sm:p-10 rounded-3xl bg-onyx-900 border-2 border-white/80 flex flex-col justify-between shadow-2xl relative">
+                        <div class="absolute -top-3.5 right-8 px-4 py-1 rounded-full bg-white text-black font-mono font-bold text-[11px] tracking-wider uppercase shadow-md flex items-center gap-1">
+                            <i data-lucide="zap" class="w-3 h-3 fill-black"></i>
+                            RECOMMENDED &bull; FULL PROTOCOL
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">Option 01</span>
+                                <span class="px-3 py-1 rounded-full text-[11px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">1-ON-1 DIAGNOSTIC INCLUDED</span>
+                            </div>
+                            <h3 class="text-2xl sm:text-3xl font-extrabold text-white mt-3">Full Mentorship Experience</h3>
+                            <p class="text-zinc-400 text-sm mt-2 leading-relaxed">The complete dual-phase program with direct private diagnosis, personal live trade audits, and daily chart context.</p>
+
+                            <div class="mt-6 mb-8">
+                                <div class="flex items-baseline gap-2">
+                                    <span id="priceMentorship" class="text-4xl sm:text-5xl font-black text-white font-mono">&#8369;15,000</span>
+                                    <span class="text-zinc-400 text-xs font-mono">COMPLETE PROGRAM</span>
+                                </div>
+                                <p class="text-[12px] text-zinc-400 font-mono mt-1">Includes both Phase 1 &amp; 2 Private 90-Min Calls</p>
+                            </div>
+
+                            <div class="space-y-3.5 text-sm">
+                                <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0"><i data-lucide="check" class="w-3.5 h-3.5"></i></div><span class="text-zinc-100 font-semibold">TWO 90-Minute 1-on-1 Calls with Ryan Jade (1 per phase)</span></div>
+                                <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0"><i data-lucide="check" class="w-3.5 h-3.5"></i></div><span class="text-zinc-100 font-semibold">1 Month of Daily Chart Markups (Every tradable day)</span></div>
+                                <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0"><i data-lucide="check" class="w-3.5 h-3.5"></i></div><span class="text-zinc-100 font-semibold">Personal Trade Execution &amp; SL Audit by Ryan Jade</span></div>
+                                <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0"><i data-lucide="check" class="w-3.5 h-3.5"></i></div><span class="text-zinc-200">Full Phase 1 Foundation &amp; Phase 2 Swing Video Vault</span></div>
+                                <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0"><i data-lucide="check" class="w-3.5 h-3.5"></i></div><span class="text-zinc-200">Interactive 20-Trade Fillable PDF Execution Sheet</span></div>
+                                <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0"><i data-lucide="check" class="w-3.5 h-3.5"></i></div><span class="text-zinc-200">Direct Priority Telegram Accountability &amp; DM line</span></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-10 pt-6 border-t border-zinc-800">
+                            <button onclick="openEnrollModal('Full Mentorship')" class="w-full py-4 text-xs font-bold tracking-wider uppercase text-black bg-white hover:bg-zinc-200 rounded-xl shadow-lg hover:shadow-white/20 transition-all duration-200 cursor-pointer">
+                                Apply For Full Mentorship Slot (<span class="priceMentorshipBtn">&#8369;15,000</span>)
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- 100% Credit Clause Bridge -->
+                <div class="mt-12 p-8 rounded-3xl bg-onyx-900 border border-zinc-800 text-center max-w-4xl mx-auto">
+                    <div class="inline-flex items-center gap-2 text-xs font-mono text-amber-400 mb-2">
+                        <i data-lucide="shield-check" class="w-4 h-4"></i>
+                        <span>THE NO-RISK UPGRADE BRIDGE</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">How The 100% Mentorship Credit Works</h3>
+                    <p class="text-zinc-400 text-sm max-w-2xl mx-auto mt-2 leading-relaxed">If you start with the Standalone Vault today and later want Ryan Jade to review your charts in the private 90-minute calls, you do not pay full price twice.</p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6 text-left font-mono text-xs">
+                        <div class="p-4 rounded-xl bg-onyx-850 border border-zinc-800">
+                            <p class="text-zinc-500 font-bold">STEP 1</p>
+                            <p class="text-white font-bold text-sm mt-1">Join Standalone (<span id="creditStep1">&#8369;4,999</span>)</p>
+                            <p class="text-zinc-400 mt-1 font-sans text-xs">Study the video vault and log your 20 mechanical trades.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-onyx-850 border border-zinc-800">
+                            <p class="text-zinc-500 font-bold">STEP 2</p>
+                            <p class="text-white font-bold text-sm mt-1">Upgrade in 30 Days</p>
+                            <p class="text-zinc-400 mt-1 font-sans text-xs">Request an upgrade to the Full 1-on-1 Mentorship.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-onyx-850 border border-emerald-500/30">
+                            <p class="text-emerald-400 font-bold">STEP 3</p>
+                            <p class="text-emerald-300 font-bold text-sm mt-1">Pay Only <span id="creditStep3">&#8369;10,001</span></p>
+                            <p class="text-zinc-300 mt-1 font-sans text-xs">100% of your standalone vault payment is credited automatically.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-24 border-t border-zinc-800/80 bg-onyx-900/30">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-xs font-mono uppercase tracking-[0.25em] text-zinc-400">Questions Answered</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Frequently Asked Questions</h2>
+                    <p class="text-zinc-400 text-sm mt-2">Everything you need to know about our trading protocols and enrollment.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="rounded-2xl bg-onyx-900 border border-zinc-800 overflow-hidden">
+                        <button onclick="toggleFaq(1)" class="w-full p-6 text-left flex items-center justify-between text-base font-bold text-zinc-200 hover:text-white cursor-pointer">
+                            <span>Why do we only trade strictly after 9:30 PM?</span>
+                            <i id="faqIcon-1" data-lucide="chevron-down" class="w-5 h-5 text-zinc-400 transition-transform"></i>
+                        </button>
+                        <div id="faqContent-1" class="px-6 pb-6 text-sm text-zinc-400 leading-relaxed border-t border-zinc-800/60 pt-4">
+                            In Philippine Time (PHT), 9:30 PM marks the official New York Session equity bell (9:30 AM EST). This is when institutional volume floods the markets, creating authentic 15-minute breakouts and genuine Fibonacci follow-through. By never opening charts before 9:30 PM, you avoid Asian and early London fakeouts, spread traps, and useless screen time.
+                        </div>
+                    </div>
+
+                    <div class="rounded-2xl bg-onyx-900 border border-zinc-800 overflow-hidden">
+                        <button onclick="toggleFaq(2)" class="w-full p-6 text-left flex items-center justify-between text-base font-bold text-zinc-200 hover:text-white cursor-pointer">
+                            <span>How do the two 90-minute private calls work?</span>
+                            <i id="faqIcon-2" data-lucide="chevron-down" class="w-5 h-5 text-zinc-400 transition-transform"></i>
+                        </button>
+                        <div id="faqContent-2" class="hidden px-6 pb-6 text-sm text-zinc-400 leading-relaxed border-t border-zinc-800/60 pt-4">
+                            If you choose the Full Mentorship, you receive two dedicated 90-minute private 1-on-1 sessions directly with Ryan Jade on Zoom/Google Meet. The first call occurs after you complete Phase 1 to audit your 20-trade journal and eliminate execution flaws. The second call takes place in Phase 2 to calibrate advanced swing points and scale position sizing.
+                        </div>
+                    </div>
+
+                    <div class="rounded-2xl bg-onyx-900 border border-zinc-800 overflow-hidden">
+                        <button onclick="toggleFaq(3)" class="w-full p-6 text-left flex items-center justify-between text-base font-bold text-zinc-200 hover:text-white cursor-pointer">
+                            <span>What if I purchase the Standalone Vault and want calls later?</span>
+                            <i id="faqIcon-3" data-lucide="chevron-down" class="w-5 h-5 text-zinc-400 transition-transform"></i>
+                        </button>
+                        <div id="faqContent-3" class="hidden px-6 pb-6 text-sm text-zinc-400 leading-relaxed border-t border-zinc-800/60 pt-4">
+                            Under our <strong>Mentorship Credit Guarantee</strong>, 100% of the money you pay for the Standalone Vault can be credited directly towards the Full Mentorship Program if you decide to upgrade within 30 days. You only pay the difference, making your entry completely risk-free.
+                        </div>
+                    </div>
+
+                    <div class="rounded-2xl bg-onyx-900 border border-zinc-800 overflow-hidden">
+                        <button onclick="toggleFaq(4)" class="w-full p-6 text-left flex items-center justify-between text-base font-bold text-zinc-200 hover:text-white cursor-pointer">
+                            <span>What happens on high-impact US Red Folder news days?</span>
+                            <i id="faqIcon-4" data-lucide="chevron-down" class="w-5 h-5 text-zinc-400 transition-transform"></i>
+                        </button>
+                        <div id="faqContent-4" class="hidden px-6 pb-6 text-sm text-zinc-400 leading-relaxed border-t border-zinc-800/60 pt-4">
+                            We release a standardized Weekly Market Readiness Protocol every Sunday. On days with extreme releases (like NFP, CPI, or FOMC rate drops), we enforce a strict <strong>NO TRADE DAY</strong> or a <strong>1:1 Take Profit / Breakeven Lockout</strong> to completely protect your capital from violent slippage and spread widening.
+                        </div>
+                    </div>
+
+                    <div class="rounded-2xl bg-onyx-900 border border-zinc-800 overflow-hidden">
+                        <button onclick="toggleFaq(5)" class="w-full p-6 text-left flex items-center justify-between text-base font-bold text-zinc-200 hover:text-white cursor-pointer">
+                            <span>Is this applicable to Forex, Crypto, or Prop Firm Challenges?</span>
+                            <i id="faqIcon-5" data-lucide="chevron-down" class="w-5 h-5 text-zinc-400 transition-transform"></i>
+                        </button>
+                        <div id="faqContent-5" class="hidden px-6 pb-6 text-sm text-zinc-400 leading-relaxed border-t border-zinc-800/60 pt-4">
+                            The mechanical 1-trade-a-day system is optimized specifically for major Forex pairs (EUR/USD, GBP/USD) during the NY session, but the mathematical 1:3 RRR risk management framework has helped hundreds of students pass FTMO, FundedNext, and 5%ers challenges with zero overtrading violations.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="py-24 border-t border-zinc-800/80 bg-onyx-950 text-center relative overflow-hidden">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <span class="text-xs font-mono uppercase tracking-[0.25em] text-zinc-400">Strictly 1 Trade A Day</span>
+                <h2 class="text-3xl sm:text-5xl font-black text-white mt-3 leading-tight font-sans">
+                    Master Mechanical Discipline.<br>Eliminate Market Anxiety.
+                </h2>
+                <p class="text-zinc-400 text-sm sm:text-base max-w-xl mx-auto mt-4 font-sans leading-relaxed">
+                    Whether you join the 1-on-1 Mentorship or begin with the Standalone Vault, your journey to rule-based trading begins today.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+                    <button onclick="openEnrollModal('Full Mentorship')" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-xs font-bold tracking-wider uppercase text-black bg-white hover:bg-zinc-200 rounded-xl shadow-lg transition-all cursor-pointer">
+                        Enroll In Mentorship
+                    </button>
+                    <button onclick="openEnrollModal('Standalone Vault')" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-xs font-semibold tracking-wider uppercase text-zinc-300 bg-onyx-850 hover:bg-onyx-800 border border-zinc-700 rounded-xl transition-all cursor-pointer">
+                        Get Standalone Access
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-zinc-800/80 bg-onyx-950 font-mono text-xs text-zinc-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex flex-col items-center md:items-start">
+                <span class="font-brand text-lg font-bold text-white tracking-widest">RYAN JADE</span>
+                <span class="text-[10px] tracking-wider text-zinc-600 mt-0.5">&copy; 2026 RYAN JADE TRADING DESK &bull; RJS PROTOCOL. ALL RIGHTS RESERVED.</span>
+            </div>
+            <div class="flex flex-wrap justify-center items-center gap-6 text-zinc-400">
+                <a href="#protocol" class="hover:text-white transition-colors">Protocol</a>
+                <a href="#curriculum" class="hover:text-white transition-colors">Curriculum</a>
+                <a href="#audit" class="hover:text-white transition-colors">Student Audit</a>
+                <a href="#calculator" class="hover:text-white transition-colors">Risk Calculator</a>
+                <a href="#pricing" class="hover:text-white transition-colors">Whop Store</a>
+                <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+            </div>
+            <div class="text-[10px] text-zinc-600 text-center md:text-right max-w-xs">
+                Trading foreign exchange on margin carries high risk. Strict risk budgets and discipline are mandatory.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Enrollment Modal -->
+    <div id="enrollModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden px-4 py-8">
+        <div class="w-full max-w-lg p-6 sm:p-8 rounded-3xl bg-onyx-900 border border-zinc-700 text-zinc-100 shadow-2xl relative">
+            <button onclick="closeEnrollModal()" class="absolute top-6 right-6 text-zinc-400 hover:text-white transition-colors cursor-pointer">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div id="enrollFormView">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="text-[10px] font-mono tracking-widest uppercase px-2.5 py-1 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">APPLICATION &bull; RJS DESK</span>
+                    <span class="text-[10px] font-mono text-emerald-400 flex items-center gap-1"><i data-lucide="lock" class="w-3 h-3"></i> SECURE ENROLLMENT</span>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold text-white mt-1">Claim Your Desk Slot</h3>
+                <p class="text-xs text-zinc-400 mt-1 font-sans">Submit your verified details below to generate your direct Whop checkout link and unlock private Telegram onboarding.</p>
+
+                <form onsubmit="handleEnrollSubmit(event)" class="mt-6 space-y-4 font-mono text-xs">
+                    <div>
+                        <label class="block text-zinc-400 mb-1 font-semibold">SELECTED PROGRAM TIER</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button type="button" id="enrollTierMentorship" onclick="setEnrollTier('Full Mentorship')" class="py-2.5 px-3 rounded-xl border text-left bg-onyx-800 border-white text-white font-bold cursor-pointer">
+                                <span class="block font-bold text-xs">Full Mentorship</span>
+                                <span class="text-[10px] text-emerald-400">Includes 2 Calls</span>
+                            </button>
+                            <button type="button" id="enrollTierStandalone" onclick="setEnrollTier('Standalone Vault')" class="py-2.5 px-3 rounded-xl border text-left bg-onyx-850 border-zinc-800 text-zinc-400 hover:text-white cursor-pointer">
+                                <span class="block font-bold text-xs">Standalone Vault</span>
+                                <span class="text-[10px] text-zinc-400">Self-Study</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-zinc-400 mb-1 font-semibold">TELEGRAM USERNAME (@)</label>
+                        <input type="text" id="enrollTg" required placeholder="@yourtelegram" class="w-full px-4 py-3 rounded-xl bg-onyx-850 border border-zinc-700 text-white focus:outline-none focus:border-white">
+                        <span class="text-[10px] text-zinc-500 mt-1 block">Ryan Jade contacts you directly here for call scheduling.</span>
+                    </div>
+                    <div>
+                        <label class="block text-zinc-400 mb-1 font-semibold">EMAIL ADDRESS</label>
+                        <input type="email" id="enrollEmail" required placeholder="trader@domain.com" class="w-full px-4 py-3 rounded-xl bg-onyx-850 border border-zinc-700 text-white focus:outline-none focus:border-white">
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-onyx-800 border border-zinc-700/80 flex items-center justify-between">
+                        <div><span class="text-[10px] text-zinc-400 block">TOTAL INVESTMENT</span><span id="enrollSummaryPlan" class="text-base font-bold text-white">Full Mentorship</span></div>
+                        <div class="text-right"><span id="enrollSummaryPrice" class="text-xl font-bold font-mono text-emerald-400">&#8369;15,000</span><span class="text-[10px] text-zinc-400 block font-mono">ONE-TIME FEE</span></div>
+                    </div>
+                    <button type="submit" class="w-full py-4 text-xs font-bold tracking-wider uppercase text-black bg-white hover:bg-zinc-200 rounded-xl shadow-lg transition-all mt-4 cursor-pointer flex items-center justify-center gap-2">
+                        <span>Proceed To Whop Checkout</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </form>
+            </div>
+
+            <div id="enrollSuccessView" class="hidden py-6 text-center space-y-4">
+                <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto">
+                    <i data-lucide="check-circle" class="w-8 h-8"></i>
+                </div>
+                <span class="text-xs font-mono uppercase tracking-widest text-emerald-400 font-bold block">Application Confirmed &bull; Priority Queued</span>
+                <h3 class="text-2xl font-bold text-white">Welcome To The Mechanical Desk</h3>
+                <p class="text-xs text-zinc-300 font-sans leading-relaxed max-w-sm mx-auto">An invitation receipt and access link has been generated. Ryan Jade will verify your Telegram channel link within 30 minutes.</p>
+                <button onclick="closeEnrollModal()" class="w-full py-3.5 bg-white text-black font-bold text-xs uppercase tracking-wider rounded-xl cursor-pointer hover:bg-zinc-200 transition-colors">
+                    Return To Desk Overview
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Client Portal Modal -->
+    <div id="portalModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md hidden px-4 py-8">
+        <div class="w-full max-w-4xl p-6 sm:p-8 rounded-3xl bg-onyx-900 border border-zinc-700 text-zinc-100 shadow-2xl relative">
+            <button onclick="closePortalModal()" class="absolute top-6 right-6 text-zinc-400 hover:text-white transition-colors cursor-pointer">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-zinc-800 gap-3">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] font-mono tracking-widest uppercase px-2.5 py-1 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">CLIENT PORTAL SIMULATOR</span>
+                        <span class="text-xs font-mono text-emerald-400 font-semibold flex items-center gap-1"><i data-lucide="shield-check" class="w-3.5 h-3.5"></i> VERIFIED MEMBER</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mt-2">Ryan Jade Student Vault &amp; Keyword Check</h3>
+                </div>
+                <div class="flex items-center gap-1 p-1 rounded-xl bg-onyx-850 border border-zinc-800 font-mono text-xs">
+                    <button id="portalBtnP1" onclick="switchPortalPhase('P1')" class="px-3 py-1.5 rounded-lg font-bold bg-white text-black">PHASE 1</button>
+                    <button id="portalBtnP2" onclick="switchPortalPhase('P2')" class="px-3 py-1.5 rounded-lg font-bold text-zinc-400 hover:text-white">PHASE 2</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
+                <div class="lg:col-span-4 space-y-2 font-mono text-xs max-h-[380px] overflow-y-auto pr-1" id="portalModulesList">
+                    <!-- Populated dynamically -->
+                </div>
+                <div class="lg:col-span-8 p-6 rounded-2xl bg-onyx-850 border border-zinc-800 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span id="portalModTag" class="text-xs font-mono text-amber-400 bg-amber-500/10 px-2.5 py-0.5 rounded border border-amber-500/20">FOUNDATION</span>
+                            <span class="text-xs font-mono text-zinc-400 flex items-center gap-1"><i data-lucide="play" class="w-3 h-3 text-emerald-400"></i> High-Def Desk Masterclass</span>
+                        </div>
+                        <h4 id="portalModTitle" class="text-xl font-bold text-white mt-3">Phase 1 Start &amp; Rules</h4>
+                        <p id="portalModSummary" class="text-sm text-zinc-300 mt-2 font-sans leading-relaxed">The operational constitution of the 1-Trade-A-Day framework and non-negotiables.</p>
+
+                        <div class="mt-5 p-6 rounded-2xl bg-onyx-900 border border-zinc-800 flex flex-col items-center justify-center text-center">
+                            <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white mb-2"><i data-lucide="play" class="w-5 h-5 fill-white ml-0.5"></i></div>
+                            <span class="text-xs font-mono text-zinc-300">VIDEO READY &bull; 1080P PROPRIETARY STREAM</span>
+                            <span class="text-[10px] font-mono text-zinc-500 mt-0.5">Lesson reveals secret keyword upon completion</span>
+                        </div>
+
+                        <div class="mt-6 p-4 rounded-xl bg-onyx-950 border border-zinc-800">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-mono text-zinc-300 font-bold flex items-center gap-1.5"><i data-lucide="key" class="w-3.5 h-3.5 text-amber-400"></i> ENTER LESSON KEYWORD</span>
+                                <span class="text-[10px] font-mono text-zinc-500">Demo Key: <code id="portalHintKey" class="text-amber-300 bg-zinc-900 px-1 py-0.5 rounded">DISCIPLINE</code></span>
+                            </div>
+                            <form onsubmit="handlePortalValidate(event)" class="flex gap-2">
+                                <input type="text" id="portalKeyInput" placeholder="Enter keyword" class="flex-1 bg-onyx-850 border border-zinc-700 rounded-xl px-3.5 py-2 font-mono text-xs text-white uppercase focus:outline-none focus:border-white">
+                                <button type="submit" class="px-4 py-2 rounded-xl bg-white text-black font-bold text-xs uppercase font-mono cursor-pointer">Validate</button>
+                            </form>
+                            <div id="portalFeedback" class="hidden mt-3 p-3 rounded-lg text-xs font-mono"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core App Logic -->
+    <script>
+        // Data Structures
+        const PROTOCOL_STEPS = [
+            { id: 1, num: '01', title: 'Pre-Market Trendlines', timing: 'UP TO 9:30 PM (PHT / NY OPEN)', rule: 'Map 4H and 1H directional order flow. Do not place any market or pending orders prior to 9:30 PM.', action: 'Check Forex Factory for high-impact USD events. Mark previous day high (PDH) and previous day low (PDL).', invalidation: 'If red-folder CPI or FOMC drops within 15 minutes of open, desk activates standby hold.', mistake: 'Entering prematurely during Asian or London afternoon drift without New York volume.' },
+            { id: 2, num: '02', title: 'Mark Session Levels', timing: 'EXACTLY AT 9:30 PM', rule: 'Lock the exact candle extrema between 8:00 PM and 9:30 PM PHT. This creates the primary expansion boundary.', action: 'Draw horizontal line on Session High and Session Low. Set alerts 2 pips outside each level.', invalidation: 'Any false wick that does not close outside boundary is strictly disregarded.', mistake: 'Altering session boundaries dynamically once the 9:30 PM candle is initiated.' },
+            { id: 3, num: '03', title: 'Wait for 15M Breakout', timing: 'STRUCTURAL EXPANSION', rule: 'The candle body MUST print and finalize beyond the session level on the 15-minute timeframe. Wicks do NOT count.', action: 'Wait for the 15M candle close at 9:45 PM or 10:00 PM. Confirm volume expansion relative to pre-session average.', invalidation: 'A wick-out that closes inside the session range indicates liquidity sweep, not breakout.', mistake: 'Jumping into an open candle before the countdown timer hits 00:00.' },
+            { id: 4, num: '04', title: 'Wait for the Pullback', timing: 'PATIENCE FILTER', rule: 'Never market-buy green expansion tops or market-sell red exhaustion spikes.', action: 'Drop to 5M/3M timeframe to identify the mitigation of broken structure or fair value confluence.', invalidation: 'If price accelerates parabolically without pulling back, we let it go. Discipline > Fear of Missing Out.', mistake: 'Buying the highs due to FOMO when green candles shoot up rapidly.' },
+            { id: 5, num: '05', title: 'Apply Fibonacci Tool', timing: 'CONFLUENCE ANCHOR', rule: 'Anchor Fibonacci from the impulsive swing low to the swing high (or vice-versa for shorts).', action: 'Target the Golden Pocket (61.8% - 78.6% retracement zone) matching broken session structural line.', invalidation: 'Retracement deeper than 88.6% voids the impulse structure; trade canceled.', mistake: 'Drawing Fibonacci backwards or anchoring to arbitrary internal noise.' },
+            { id: 6, num: '06', title: 'Fixed SL & Budget', timing: 'CAPITAL PRESERVATION', rule: 'Exact 1.0% or 0.5% account capital risked. Position size is mathematically derived: (Account × Risk%) / (Pips × PipValue).', action: 'Place Stop Loss 2-3 pips beyond structural swing invalidation. Pre-input target Take Profit at exact 1:3 RRR.', invalidation: 'Moving Stop Loss wider during an active trade is grounds for immediate desk expulsion.', mistake: 'Roughly estimating lot size with round numbers (e.g. standard 1.00 lot blindly).' },
+            { id: 7, num: '07', title: 'Execute & Close The Day', timing: 'TERMINATION PROTOCOL', rule: 'Strict 1 position maximum per 24 hours. At 2:00 AM PHT, mandatory Breakeven lock or chart terminal shutdown.', action: 'Enter position. Set alerts for TP / SL / 2:00 AM Breakeven. Step away from the monitor immediately.', invalidation: 'Revenge trading is physically impossible when your trading screen is shut down.', mistake: 'Sitting in front of the charts staring at fluctuating tick candles and second-guessing.' }
+        ];
+
+        const P1_MODULES = [
+            { num: '01', title: 'Phase 1 Start & Rules', tag: 'FOUNDATION', key: 'DISCIPLINE', summary: 'The operational constitution of the 1-Trade-A-Day framework and non-negotiables.' },
+            { num: '02', title: 'Objective & Trader Identity', tag: 'MINDSET SHIFT', key: 'MECHANICAL', summary: 'Decoupling trading from emotional dopamine. Shifting from gambler to institutional executioner.' },
+            { num: '03', title: 'RJS Core System Mechanics', tag: 'CORE EDGE', key: 'PROTOCOL', summary: 'Full blueprint: 9:30 PM trigger, 15M body closes, session high/low framing, and entry criteria.' },
+            { num: '04', title: 'Forex Factory News Filtering', tag: 'RISK FILTER', key: 'CLEARANCE', summary: 'Classifying red-folder releases, slippage avoidance, and knowing when the desk stands down.' },
+            { num: '05', title: 'Masterclass: Power of Fibonacci', tag: 'ENTRY ANCHOR', key: 'CONFLUENCE', summary: 'The golden pocket (61.8% - 78.6%) retracements aligned with broken market structure.' },
+            { num: '06', title: 'Masterclass: Psychology of TP', tag: 'GREED CONTROL', key: 'TARGET', summary: 'Eliminating the urge to move profit targets mid-trade. Banking the 1:3 mathematically.' },
+            { num: '07', title: 'Masterclass: Psychology of SL', tag: 'ACCEPTANCE', key: 'VALIDATED', summary: 'Embracing losses as simple business overhead expenses. Zero revenge or emotional spirals.' }
+        ];
+
+        const P2_MODULES = [
+            { num: '01', title: 'Advanced Points of Interest (POIs)', tag: 'HIGH PROBABILITY', key: 'STRUCTURE', summary: 'Institutional supply/demand zones and unmitigated order blocks for high-conviction entries.' },
+            { num: '02', title: 'Higher Timeframe S&R Integration', tag: 'HTF ALIGNMENT', key: 'MULTITIME', summary: 'Harmonizing Daily and 4-Hour macro bias with the 9:30 PM New York intraday setup.' },
+            { num: '03', title: '1:4 to 1:5 Asymmetrical RRR Setups', tag: 'SCALE MULTIPLIER', key: 'ASYMMETRY', summary: 'Executing extended swing runs on prime structural trend days while keeping risk static.' },
+            { num: '04', title: 'Session Sweep & Liquidity Pulls', tag: 'INSTITUTIONAL FLOW', key: 'LIQUIDITY', summary: 'Recognizing Judas swings, London session highs sweeps, and reverse expansion traps.' },
+            { num: '05', title: 'Multi-Position Runner Management', tag: 'RISK CONTROL', key: 'RUNNER', summary: 'Splitting risk: banking 80% at 1:3 and trailing the remaining 20% to macro weekly POIs.' },
+            { num: '06', title: '10-Trade Phase 2 Audit Sequence', tag: 'EXECUTION TEST', key: 'BENCHMARK', summary: 'The rigorous 10-trade validation checklist required before booking your 2nd 90-min call.' },
+            { num: '07', title: 'Institutional Independence Setup', tag: 'FINAL CLEARANCE', key: 'AUTONOMY', summary: 'Prop firm scaling rules, funded trader risk protocols, and lifelong self-governing execution.' }
+        ];
+
+        let tradeRecords = [
+            { num: 1, date: 'OCT 20', pair: 'EURUSD', dir: 'BUY', rrr: '1:3.0', status: 'TP_HIT', pnl: 3.0 },
+            { num: 2, date: 'OCT 21', pair: 'GBPUSD', dir: 'SELL', rrr: '1:1.0', status: 'BE_HIT', pnl: 0.0 },
+            { num: 3, date: 'OCT 22', pair: 'EURUSD', dir: 'BUY', rrr: '1:3.0', status: 'SL_HIT', pnl: -1.0 },
+            { num: 4, date: 'OCT 23', pair: 'GBPUSD', dir: 'BUY', rrr: '1:3.0', status: 'TP_HIT', pnl: 3.0 },
+            { num: 5, date: 'OCT 26', pair: 'EURUSD', dir: 'SELL', rrr: '1:3.0', status: 'TP_HIT', pnl: 3.0 },
+            { num: 6, date: 'OCT 27', pair: 'EURUSD', dir: 'BUY', rrr: '1:3.0', status: 'SL_HIT', pnl: -1.0 },
+            { num: 7, date: 'OCT 28', pair: 'GBPUSD', dir: 'SELL', rrr: '1:3.0', status: 'TP_HIT', pnl: 3.0 }
+        ];
+
+        let currentCurrency = 'PHP';
+        let currentEnrollTier = 'Full Mentorship';
+        let portalPhase = 'P1';
+        let portalActiveIdx = 0;
+        let unlockedModules = ['01'];
+
+        // Live Clock & Countdown
+        function updateClock() {
+            const now = new Date();
+            const phtString = now.toLocaleTimeString('en-US', { timeZone: 'Asia/Manila', hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            document.getElementById('heroClock').textContent = phtString;
+
+            const totalMin = now.getHours() * 60 + now.getMinutes();
+            if (totalMin >= 1290 || totalMin < 120) {
+                document.getElementById('heroCountdownWrap').innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span><span class="text-emerald-400 font-bold">ACTIVE EXECUTION WINDOW (1 TRADE)</span>';
+            } else if (totalMin >= 120 && totalMin < 300) {
+                document.getElementById('heroCountdownWrap').innerHTML = '<span class="w-2 h-2 rounded-full bg-zinc-500"></span><span class="text-zinc-400">2:00 AM CUTOFF &bull; CHARTS SHUTDOWN</span>';
+            } else {
+                const diffMin = (1290 - totalMin + 1440) % 1440;
+                const h = Math.floor(diffMin / 60);
+                const m = diffMin % 60;
+                const s = 59 - now.getSeconds();
+                document.getElementById('heroCountdown').textContent = `${String(h).padStart(2, '0')}h ${String(m).padStart(2, '0')}m ${String(s).padStart(2, '0')}s`;
+            }
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // 7-Step Protocol Inspector
+        function selectStep(id) {
+            const step = PROTOCOL_STEPS.find(s => s.id === id) || PROTOCOL_STEPS[0];
+            document.getElementById('inspectStepBadge').textContent = `STEP ${step.num} INSPECTION`;
+            document.getElementById('inspectStepTitle').textContent = step.title;
+            document.getElementById('inspectStepTiming').textContent = `Timing: ${step.timing}`;
+            document.getElementById('inspectRule').textContent = step.rule;
+            document.getElementById('inspectAction').textContent = step.action;
+            document.getElementById('inspectInvalidation').textContent = step.invalidation;
+            document.getElementById('inspectMistake').textContent = step.mistake;
+
+            for (let i = 1; i <= 6; i++) {
+                const card = document.getElementById(`stepCard-${i}`);
+                const numBox = card.querySelector('.step-num');
+                if (i === id) {
+                    card.className = "p-6 rounded-2xl bg-onyx-900 border border-white/80 shadow-lg shadow-white/5 ring-1 ring-white/30 transition-all duration-300 relative group cursor-pointer";
+                    numBox.className = "w-10 h-10 rounded-xl bg-white text-black flex items-center justify-center font-mono font-bold text-sm step-num";
+                } else {
+                    card.className = "p-6 rounded-2xl bg-onyx-900 border border-zinc-800 hover:border-zinc-700 transition-all duration-300 relative group cursor-pointer";
+                    numBox.className = "w-10 h-10 rounded-xl bg-onyx-800 border border-zinc-700/80 text-white flex items-center justify-center font-mono font-bold text-sm step-num";
+                }
+            }
+            lucide.createIcons();
+        }
+
+        // Audit Sheet Table Renderer
+        function renderAuditRows() {
+            const container = document.getElementById('tradeRowsContainer');
+            let html = `
+                <div class="grid grid-cols-5 text-[10px] text-zinc-500 pb-2 border-b border-zinc-900 font-semibold uppercase sticky top-0 bg-onyx-950">
+                    <span># / DATE</span><span>PAIR</span><span>POS</span><span>RRR</span><span class="text-right">RESULT</span>
+                </div>
+            `;
+            let net = 0;
+            let wins = 0;
+            tradeRecords.forEach(t => {
+                net += t.pnl;
+                if (t.status === 'TP_HIT') wins++;
+                const color = t.status === 'TP_HIT' ? 'text-emerald-400' : t.status === 'SL_HIT' ? 'text-red-400' : 'text-amber-400';
+                const label = t.status === 'TP_HIT' ? `TP (+${t.pnl}R)` : t.status === 'SL_HIT' ? `SL (${t.pnl}R)` : 'BE (0R)';
+                html += `
+                    <div class="grid grid-cols-5 text-zinc-300 py-1.5 border-b border-zinc-900/60 items-center">
+                        <span class="text-zinc-500">${String(t.num).padStart(2, '0')} / ${t.date}</span>
+                        <span class="font-medium text-white">${t.pair}</span>
+                        <span class="${t.dir === 'BUY' ? 'text-emerald-400' : 'text-red-400'}">${t.dir}</span>
+                        <span>${t.rrr}</span>
+                        <span class="text-right font-bold ${color}">${label}</span>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            document.getElementById('loggedCount').textContent = `${tradeRecords.length} / 20 TRADES`;
+            const rate = tradeRecords.length > 0 ? Math.round((wins / tradeRecords.length) * 100) : 0;
+            document.getElementById('loggedWinRate').textContent = `${rate}%`;
+            document.getElementById('loggedNetR').textContent = net >= 0 ? `+${net.toFixed(1)}R` : `${net.toFixed(1)}R`;
+            document.getElementById('loggedNetR').className = `font-mono ${net >= 0 ? 'text-emerald-400' : 'text-red-400'}`;
+        }
+        renderAuditRows();
+
+        function toggleAddTradeForm() {
+            document.getElementById('addTradeBox').classList.toggle('hidden');
+        }
+
+        function submitTrade() {
+            const pair = document.getElementById('newTradePair').value;
+            const dir = document.getElementById('newTradeDir').value;
+            const res = document.getElementById('newTradeResult').value;
+            const pnl = res === 'TP_HIT' ? 3.0 : res === 'SL_HIT' ? -1.0 : 0.0;
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }).toUpperCase();
+
+            tradeRecords.push({
+                num: tradeRecords.length + 1,
+                date: dateStr,
+                pair,
+                dir,
+                rrr: res === 'BE_HIT' ? '1:1.0' : '1:3.0',
+                status: res,
+                pnl
+            });
+            toggleAddTradeForm();
+            renderAuditRows();
+        }
+
+        function resetTrades() {
+            tradeRecords = [
+                { num: 1, date: 'OCT 20', pair: 'EURUSD', dir: 'BUY', rrr: '1:3.0', status: 'TP_HIT', pnl: 3.0 },
+                { num: 2, date: 'OCT 21', pair: 'GBPUSD', dir: 'SELL', rrr: '1:1.0', status: 'BE_HIT', pnl: 0.0 },
+                { num: 3, date: 'OCT 22', pair: 'EURUSD', dir: 'BUY', rrr: '1:3.0', status: 'SL_HIT', pnl: -1.0 },
+                { num: 4, date: 'OCT 23', pair: 'GBPUSD', dir: 'BUY', rrr: '1:3.0', status: 'TP_HIT', pnl: 3.0 },
+                { num: 5, date: 'OCT 26', pair: 'EURUSD', dir: 'SELL', rrr: '1:3.0', status: 'TP_HIT', pnl: 3.0 },
+                { num: 6, date: 'OCT 27', pair: 'EURUSD', dir: 'BUY', rrr: '1:3.0', status: 'SL_HIT', pnl: -1.0 },
+                { num: 7, date: 'OCT 28', pair: 'GBPUSD', dir: 'SELL', rrr: '1:3.0', status: 'TP_HIT', pnl: 3.0 }
+            ];
+            renderAuditRows();
+        }
+
+        // Position Sizing Calculator
+        let calcBalance = 50000;
+        let calcRiskPct = 1.0;
+
+        function setBalance(val) {
+            calcBalance = val;
+            document.getElementById('balanceSlider').value = val;
+            calcRisk();
+        }
+
+        function setRiskPercent(pct) {
+            calcRiskPct = pct;
+            calcRisk();
+        }
+
+        function calcRisk() {
+            calcBalance = Number(document.getElementById('balanceSlider').value);
+            const slPips = Number(document.getElementById('slPipsSlider').value);
+
+            document.getElementById('balanceDisplay').textContent = `$${calcBalance.toLocaleString()}`;
+            document.getElementById('riskPercentDisplay').textContent = `${calcRiskPct.toFixed(1)}%`;
+            document.getElementById('slPipsDisplay').textContent = `${slPips} Pips`;
+
+            const maxLoss = (calcBalance * calcRiskPct) / 100;
+            const lot = (maxLoss / (slPips * 10)).toFixed(2);
+            const reward = maxLoss * 3;
+
+            document.getElementById('outLotSize').textContent = lot;
+            document.getElementById('outPipsPill').textContent = slPips;
+            document.getElementById('outMaxLoss').textContent = `-$${maxLoss.toFixed(2)}`;
+            document.getElementById('outTargetReward').textContent = `+$${reward.toFixed(2)}`;
+            document.getElementById('outTargetPips').textContent = `${slPips * 3} Pips Target`;
+        }
+        calcRisk();
+
+        // Currency Toggle
+        function setCurrency(curr) {
+            currentCurrency = curr;
+            const btnPhp = document.getElementById('btnPhp');
+            const btnUsd = document.getElementById('btnUsd');
+
+            if (curr === 'PHP') {
+                btnPhp.className = "px-4 py-1.5 rounded-lg bg-white text-black font-bold transition-all cursor-pointer";
+                btnUsd.className = "px-4 py-1.5 rounded-lg text-zinc-400 hover:text-white font-medium transition-all cursor-pointer";
+                document.getElementById('priceStandalone').textContent = "₱4,999";
+                document.getElementById('priceMentorship').textContent = "₱15,000";
+                document.querySelectorAll('.priceStandaloneBtn').forEach(el => el.textContent = "₱4,999");
+                document.querySelectorAll('.priceMentorshipBtn').forEach(el => el.textContent = "₱15,000");
+                document.getElementById('creditStep1').textContent = "₱4,999";
+                document.getElementById('creditStep3').textContent = "₱10,001";
+            } else {
+                btnUsd.className = "px-4 py-1.5 rounded-lg bg-white text-black font-bold transition-all cursor-pointer";
+                btnPhp.className = "px-4 py-1.5 rounded-lg text-zinc-400 hover:text-white font-medium transition-all cursor-pointer";
+                document.getElementById('priceStandalone').textContent = "$99";
+                document.getElementById('priceMentorship').textContent = "$299";
+                document.querySelectorAll('.priceStandaloneBtn').forEach(el => el.textContent = "$99");
+                document.querySelectorAll('.priceMentorshipBtn').forEach(el => el.textContent = "$299");
+                document.getElementById('creditStep1').textContent = "$99";
+                document.getElementById('creditStep3').textContent = "$200";
+            }
+            updateEnrollSummary();
+        }
+
+        // FAQ Toggle
+        function toggleFaq(id) {
+            const content = document.getElementById(`faqContent-${id}`);
+            const icon = document.getElementById(`faqIcon-${id}`);
+            content.classList.toggle('hidden');
+            if (content.classList.contains('hidden')) {
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Enrollment Modal
+        function openEnrollModal(tier) {
+            currentEnrollTier = tier || 'Full Mentorship';
+            setEnrollTier(currentEnrollTier);
+            document.getElementById('enrollFormView').classList.remove('hidden');
+            document.getElementById('enrollSuccessView').classList.add('hidden');
+            document.getElementById('enrollModal').classList.remove('hidden');
+        }
+
+        function closeEnrollModal() {
+            document.getElementById('enrollModal').classList.add('hidden');
+        }
+
+        function setEnrollTier(tier) {
+            currentEnrollTier = tier;
+            const btnMentorship = document.getElementById('enrollTierMentorship');
+            const btnStandalone = document.getElementById('enrollTierStandalone');
+
+            if (tier === 'Full Mentorship') {
+                btnMentorship.className = "py-2.5 px-3 rounded-xl border text-left bg-onyx-800 border-white text-white font-bold cursor-pointer";
+                btnStandalone.className = "py-2.5 px-3 rounded-xl border text-left bg-onyx-850 border-zinc-800 text-zinc-400 hover:text-white cursor-pointer";
+            } else {
+                btnStandalone.className = "py-2.5 px-3 rounded-xl border text-left bg-onyx-800 border-white text-white font-bold cursor-pointer";
+                btnMentorship.className = "py-2.5 px-3 rounded-xl border text-left bg-onyx-850 border-zinc-800 text-zinc-400 hover:text-white cursor-pointer";
+            }
+            updateEnrollSummary();
+        }
+
+        function updateEnrollSummary() {
+            document.getElementById('enrollSummaryPlan').textContent = currentEnrollTier;
+            const price = currentEnrollTier === 'Full Mentorship'
+                ? (currentCurrency === 'PHP' ? '₱15,000' : '$299')
+                : (currentCurrency === 'PHP' ? '₱4,999' : '$99');
+            document.getElementById('enrollSummaryPrice').textContent = price;
+        }
+
+        function handleEnrollSubmit(e) {
+            e.preventDefault();
+            document.getElementById('enrollFormView').classList.add('hidden');
+            document.getElementById('enrollSuccessView').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        // Client Portal Simulator Modal
+        function openPortalModal(modNum) {
+            if (modNum) {
+                const idx = P1_MODULES.findIndex(m => m.num === modNum);
+                portalActiveIdx = idx >= 0 ? idx : 0;
+            }
+            renderPortalModules();
+            document.getElementById('portalModal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closePortalModal() {
+            document.getElementById('portalModal').classList.add('hidden');
+        }
+
+        function switchPortalPhase(phase) {
+            portalPhase = phase;
+            portalActiveIdx = 0;
+            const btnP1 = document.getElementById('portalBtnP1');
+            const btnP2 = document.getElementById('portalBtnP2');
+            if (phase === 'P1') {
+                btnP1.className = "px-3 py-1.5 rounded-lg font-bold bg-white text-black";
+                btnP2.className = "px-3 py-1.5 rounded-lg font-bold text-zinc-400 hover:text-white";
+            } else {
+                btnP2.className = "px-3 py-1.5 rounded-lg font-bold bg-amber-400 text-black";
+                btnP1.className = "px-3 py-1.5 rounded-lg font-bold text-zinc-400 hover:text-white";
+            }
+            renderPortalModules();
+        }
+
+        function renderPortalModules() {
+            const list = portalPhase === 'P1' ? P1_MODULES : P2_MODULES;
+            const container = document.getElementById('portalModulesList');
+            let html = '';
+            list.forEach((m, idx) => {
+                const isSelected = idx === portalActiveIdx;
+                html += `
+                    <button type="button" onclick="selectPortalModule(${idx})" class="w-full p-3 rounded-xl border text-left flex items-center justify-between transition-all cursor-pointer ${isSelected ? 'bg-onyx-800 border-white text-white' : 'bg-onyx-850 border-zinc-800 text-zinc-400 hover:border-zinc-700'}">
+                        <div class="flex items-center gap-2.5">
+                            <span class="font-bold">${m.num}.</span>
+                            <span class="font-sans font-medium text-xs truncate max-w-[150px]">${m.title}</span>
+                        </div>
+                        <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i>
+                    </button>
+                `;
+            });
+            container.innerHTML = html;
+
+            const cur = list[portalActiveIdx];
+            document.getElementById('portalModTag').textContent = cur.tag;
+            document.getElementById('portalModTitle').textContent = cur.title;
+            document.getElementById('portalModSummary').textContent = cur.summary;
+            document.getElementById('portalHintKey').textContent = cur.key;
+            document.getElementById('portalFeedback').className = 'hidden';
+            lucide.createIcons();
+        }
+
+        function selectPortalModule(idx) {
+            portalActiveIdx = idx;
+            renderPortalModules();
+        }
+
+        function handlePortalValidate(e) {
+            e.preventDefault();
+            const list = portalPhase === 'P1' ? P1_MODULES : P2_MODULES;
+            const cur = list[portalActiveIdx];
+            const inp = document.getElementById('portalKeyInput').value.trim().toUpperCase();
+            const fb = document.getElementById('portalFeedback');
+
+            if (inp === cur.key) {
+                fb.className = "mt-3 p-3 rounded-lg text-xs font-mono bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 block";
+                fb.textContent = `KEYWORD VERIFIED: "${inp}". Module marked 100% complete!`;
+                document.getElementById('portalKeyInput').value = '';
+            } else {
+                fb.className = "mt-3 p-3 rounded-lg text-xs font-mono bg-red-500/10 border border-red-500/30 text-red-300 block";
+                fb.textContent = `INVALID KEYWORD. For this demo, enter "${cur.key}".`;
+            }
+        }
+
+        // Initialize Lucide Icons on load
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
