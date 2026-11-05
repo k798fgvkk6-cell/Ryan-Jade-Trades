@@ -1,47 +1,1982 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RYAN JADE | Mechanical Trading Protocol & Discipline Mentorship</title>
-    <meta name="description" content="Institutional mechanical execution desk. 1 trade a day, strict 9:30 PM rule, 1:3 RRR focus, and systematic 20-trade audited discipline mentorship." />
-    <meta property="og:title" content="RYAN JADE | Mechanical Trading Protocol & Discipline Mentorship" />
-    <meta property="og:description" content="Institutional mechanical execution desk. 1 trade a day, strict 9:30 PM rule, 1:3 RRR focus, and systematic 20-trade audited discipline mentorship." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-[#050507] text-zinc-100 antialiased selection:bg-zinc-800 selection:text-white">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-    <script>
-      // Curriculum Lesson Click Interceptor & Portal Restricted Modal Logic
-      document.addEventListener('click', function(e) {
-        var card = e.target.closest('.lesson-card, .module-item');
-        var modal = document.getElementById('portal-restricted-modal');
-        var titleEl = document.getElementById('portal-restricted-title');
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RYAN JADE | Mechanical Trading Protocol & Discipline Mentorship</title>
+  <meta name="description" content="Institutional mechanical execution desk. 1 trade a day, strict 9:30 PM rule, 1:3 RRR focus, and systematic 20-trade audited discipline mentorship." />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
-        if (card) {
-          e.preventDefault();
-          var title = card.getAttribute('data-title') || (card.querySelector('h4') ? card.querySelector('h4').innerText.trim() : 'Phase 1 Start & Rules');
-          if (titleEl) {
-            titleEl.textContent = title.indexOf('- Video Locked') !== -1 ? title : title + ' - Video Locked';
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            cinzel: ['Cinzel', 'serif']
           }
-          if (modal) {
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-          }
-        } else if (modal && e.target === modal) {
-          // Dark background overlay click closes modal
-          modal.classList.add('hidden');
-          modal.classList.remove('flex');
-        } else if (modal && e.target.closest('[data-close-restricted-modal]')) {
-          modal.classList.add('hidden');
-          modal.classList.remove('flex');
         }
-      });
-    </script>
-  </body>
+      }
+    };
+  </script>
+
+  <!-- React 18, React-DOM 18, and Babel Standalone CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      background-color: #050507;
+      color: #f4f4f5;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    .bg-grid-pattern {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+<body class="bg-[#050507] text-zinc-100 antialiased selection:bg-zinc-800 selection:text-white">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // --- SVG ICON HELPERS ---
+    const ShieldCheck = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+    );
+    const Lock = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    );
+    const Clock = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    );
+    const ArrowRight = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    );
+    const Check = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    );
+    const X = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    );
+    const Play = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+    );
+    const Target = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+    );
+    const TrendingUp = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+    );
+    const TrendingDown = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
+    );
+    const AlertTriangle = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+    );
+    const ShieldAlert = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+    );
+    const RefreshCw = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+    );
+    const Plus = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+    );
+    const Trash2 = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+    );
+    const ChevronDown = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    );
+    const ChevronRight = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    );
+    const UserCheck = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
+    );
+    const Video = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>
+    );
+    const Zap = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+    );
+    const Flame = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3.5z"/></svg>
+    );
+    const Key = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21 2-2 2m-1.5 1.5L14 9l-2-2-4 4-2-2-4 4"/><circle cx="17.5" cy="6.5" r="3.5"/></svg>
+    );
+    const PhoneCall = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    );
+    const Award = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+    );
+    const Eye = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+    );
+    const AlertCircle = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+    );
+    const CheckCircle = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+    );
+    const XCircle = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" x2="9" y1="9" y2="15"/><line x1="9" x2="15" y1="9" y2="15"/></svg>
+    );
+
+    // --- CURRICULUM DATA ---
+    const PHASE_1_MODULES = [
+      { number: '01', title: 'Phase 1 Start & Rules', duration: '24 mins', summary: 'The operational constitution of the 1-Trade-A-Day framework and non-negotiables.' },
+      { number: '02', title: 'Objective & Trader Identity', duration: '31 mins', summary: 'Decoupling trading from emotional dopamine. Shifting from gambler to institutional executioner.' },
+      { number: '03', title: 'RJS Core System Mechanics', duration: '42 mins', summary: 'Intraday session framework, structural breakout qualification, and institutional entry parameters.' },
+      { number: '04', title: 'Forex Factory News Filtering', duration: '28 mins', summary: 'Institutional macroeconomic risk filters, high-impact news defense, and automated capital preservation.' },
+      { number: '05', title: 'Masterclass: Power of Fibonacci', duration: '38 mins', summary: 'Proprietary structural confluence retracements and institutional execution zones.' },
+      { number: '06', title: 'Masterclass: Psychology of TP', duration: '35 mins', summary: 'Eliminating the urge to move profit targets mid-trade. Banking the 1:3 mathematically without emotion.' },
+      { number: '07', title: 'Masterclass: Psychology of SL', duration: '33 mins', summary: 'Embracing losses as simple business overhead expenses. Zero revenge trading or emotional drawdown spirals.' }
+    ];
+
+    const PHASE_2_MODULES = [
+      { number: '01', title: 'Advanced Points of Interest (POIs)', duration: '45 mins', summary: 'Institutional supply/demand zones and proprietary order blocks for high-conviction entries.' },
+      { number: '02', title: 'Higher Timeframe S&R Integration', duration: '39 mins', summary: 'Harmonizing macro multi-timeframe bias with New York session execution architecture.' },
+      { number: '03', title: '1:4 to 1:5 Asymmetrical RRR Setups', duration: '52 mins', summary: 'Executing extended swing runs on prime structural trend days while keeping risk static.' },
+      { number: '04', title: 'Session Sweep & Liquidity Pulls', duration: '41 mins', summary: 'Recognizing institutional liquidity sweeps, fakeouts, and reverse expansion traps.' },
+      { number: '05', title: 'Multi-Position Runner Management', duration: '36 mins', summary: 'Proprietary multi-position scale-out protocols and systematic trailing stop management.' },
+      { number: '06', title: '10-Trade Phase 2 Audit Sequence', duration: '34 mins', summary: 'The rigorous 10-trade validation checklist required before booking your 2nd 90-min call.' },
+      { number: '07', title: 'Institutional Independence Setup', duration: '48 mins', summary: 'Prop firm scaling rules, funded trader risk protocols, and lifelong self-governing execution.' }
+    ];
+
+    // --- PROTOCOL STEPS DATA ---
+    const PROTOCOL_STEPS = [
+      {
+        id: 1, stepNumber: '01', title: 'Pre-Market Trendlines', timing: 'UP TO 9:30 PM (PHT / NY OPEN)', badge: 'STRUCTURAL CONTEXT',
+        description: 'Update all higher-timeframe trendlines, support & resistance zones, and Forex Factory red-folder filters before session bell.',
+        deepDive: {
+          rule: 'Map 4H and 1H directional order flow. Do not place any market or pending orders prior to 9:30 PM.',
+          action: 'Check Forex Factory for high-impact USD events. Mark previous day high (PDH) and previous day low (PDL).',
+          invalidation: 'If red-folder CPI or FOMC drops within 15 minutes of open, desk activates standby hold.',
+          mistakeToAvoid: 'Entering prematurely during Asian or London afternoon drift without New York volume.'
+        }
+      },
+      {
+        id: 2, stepNumber: '02', title: 'Mark Session Levels', timing: 'EXACTLY AT 9:30 PM', badge: 'LEVEL LOCK',
+        description: 'Pinpoint and lock the active Session High and Session Low on your TradingView layout. No trading prior to this timestamp.',
+        deepDive: {
+          rule: 'Lock the exact candle extrema between 8:00 PM and 9:30 PM PHT. This creates the primary expansion boundary.',
+          action: 'Draw horizontal line on Session High and Session Low. Set alerts 2 pips outside each level.',
+          invalidation: 'Any false wick that does not close outside boundary is strictly disregarded.',
+          mistakeToAvoid: 'Altering session boundaries dynamically once the 9:30 PM candle is initiated.'
+        }
+      },
+      {
+        id: 3, stepNumber: '03', title: 'Wait for 15M Breakout', timing: 'STRUCTURAL EXPANSION', badge: 'VOLUME CONFIRMATION',
+        description: 'Require a verified body close on the 15-Minute candle beyond marked session limits. Never front-run the momentum.',
+        deepDive: {
+          rule: 'The candle body MUST print and finalize beyond the session level on the 15-minute timeframe. Wicks do NOT count.',
+          action: 'Wait for the 15M candle close at 9:45 PM or 10:00 PM. Confirm volume expansion relative to pre-session average.',
+          invalidation: 'A wick-out that closes inside the session range indicates liquidity sweep, not breakout.',
+          mistakeToAvoid: 'Jumping into an open candle before the countdown timer hits 00:00.'
+        }
+      },
+      {
+        id: 4, stepNumber: '04', title: 'Wait for the Pullback', timing: 'PATIENCE FILTER', badge: 'DISCIPLINE DRILL',
+        description: 'Chasing impulses is forbidden. Let price breathe and retrace back into historical support/resistance structure.',
+        deepDive: {
+          rule: 'Never market-buy green expansion tops or market-sell red exhaustion spikes.',
+          action: 'Drop to 5M/3M timeframe to identify the mitigation of broken structure or fair value confluence.',
+          invalidation: 'If price accelerates parabolically without pulling back, we let it go. Discipline > Fear of Missing Out.',
+          mistakeToAvoid: 'Buying the highs due to FOMO when green candles shoot up rapidly.'
+        }
+      },
+      {
+        id: 5, stepNumber: '05', title: 'Apply Fibonacci Tool', timing: 'CONFLUENCE ANCHOR', badge: 'SNIPER CALIBRATION',
+        description: 'Pull swing Fibonacci retracements to align your sniper entry, invalidation level, and target 1:3 mathematical trajectory.',
+        deepDive: {
+          rule: 'Anchor Fibonacci from the impulsive swing low to the swing high (or vice-versa for shorts).',
+          action: 'Target the proprietary structural confluence zone matching broken session structural line.',
+          invalidation: 'Retracement beyond structural invalidation voids the impulse structure; trade canceled.',
+          mistakeToAvoid: 'Drawing Fibonacci backwards or anchoring to arbitrary internal noise.'
+        }
+      },
+      {
+        id: 6, stepNumber: '06', title: 'Fixed SL & Risk Budget', timing: 'CAPITAL PRESERVATION', badge: 'MATHEMATICAL SHIELD',
+        description: 'Calculate exact position lot size so your stop loss never exceeds your predetermined risk budget. Zero second-guessing.',
+        deepDive: {
+          rule: 'Exact 1.0% or 0.5% account capital risked. Position size is mathematically derived: (Account × Risk%) / (Pips × PipValue).',
+          action: 'Place Stop Loss 2-3 pips beyond structural swing invalidation. Pre-input target Take Profit at exact 1:3 RRR.',
+          invalidation: 'Moving Stop Loss wider during an active trade is grounds for immediate desk expulsion.',
+          mistakeToAvoid: 'Roughly estimating lot size with round numbers (e.g. standard 1.00 lot blindly).'
+        }
+      },
+      {
+        id: 7, stepNumber: '07', title: 'Execute & Close The Day', timing: 'TERMINATION PROTOCOL', badge: 'THE CORE RULE',
+        description: '1 Trade A Day. If Win: 1:3 RRR banked. If Loss: SL hit. Either way: Close TradingView, log audit, and shut down.',
+        deepDive: {
+          rule: 'Strict 1 position maximum per 24 hours. At 2:00 AM PHT, mandatory Breakeven lock or chart terminal shutdown.',
+          action: 'Enter position. Set alerts for TP / SL / 2:00 AM Breakeven. Step away from the monitor immediately.',
+          invalidation: 'Revenge trading is physically impossible when your trading screen is shut down.',
+          mistakeToAvoid: 'Sitting in front of the charts staring at fluctuating tick candles and second-guessing.'
+        }
+      }
+    ];
+
+    // --- FAQS DATA ---
+    const FAQS = [
+      {
+        q: 'Why do we only trade strictly after 9:30 PM?',
+        a: 'In Philippine Time (PHT), 9:30 PM marks the official New York Session equity bell (9:30 AM EST). This is when institutional volume floods the markets, creating authentic 15-minute breakouts and genuine Fibonacci follow-through. By never opening charts before 9:30 PM, you avoid Asian and early London fakeouts, spread traps, and useless screen time.'
+      },
+      {
+        q: 'How do the two 90-minute private calls work?',
+        a: 'If you choose the Full Mentorship, you receive two dedicated 90-minute private 1-on-1 sessions directly with Ryan Jade on Zoom/Google Meet. The first call occurs after you complete Phase 1 to audit your 20-trade journal and eliminate execution flaws. The second call takes place in Phase 2 to calibrate advanced swing points and scale position sizing.'
+      },
+      {
+        q: 'What if I purchase the Standalone Vault and want calls later?',
+        a: 'Under our Mentorship Credit Guarantee, 100% of the money you pay for the Standalone Vault can be credited directly towards the Full Mentorship Program if you decide to upgrade within 30 days. You only pay the difference, making your entry completely risk-free.'
+      },
+      {
+        q: 'What happens on high-impact US Red Folder news days?',
+        a: 'We release a standardized Weekly Market Readiness Protocol every Sunday. On days with extreme releases (like NFP, CPI, or FOMC rate drops), we enforce a strict NO TRADE DAY or a 1:1 Take Profit / Breakeven Lockout to completely protect your capital from violent slippage and spread widening.'
+      },
+      {
+        q: 'Why are there secret keywords at the end of video modules?',
+        a: 'To maintain desk integrity and ensure no student skips fundamental risk management, every lesson reveals a single-word verification code. You log these onto your fillable audit PDF to prove you watched and absorbed each rule before receiving clearance to book diagnostic calls or unlock Phase 2.'
+      },
+      {
+        q: 'Is this applicable to Forex, Crypto, or Prop Firm Challenges?',
+        a: 'The mechanical 1-trade-a-day system is optimized specifically for major Forex pairs (EUR/USD, GBP/USD) during the NY session, but the mathematical 1:3 RRR risk management framework has helped hundreds of students pass FTMO, FundedNext, and 5%ers challenges with zero overtrading violations.'
+      }
+    ];
+
+    // --- MAIN APP COMPONENT ---
+    function App() {
+      // Modals
+      const [isRestrictedModalOpen, setIsRestrictedModalOpen] = useState(false);
+      const [restrictedModalTitle, setRestrictedModalTitle] = useState('');
+      const [isPortalModalOpen, setIsPortalModalOpen] = useState(false);
+      const [isCapacityModalOpen, setIsCapacityModalOpen] = useState(false);
+
+      // Open Modal Helpers
+      const handleOpenRestricted = (title) => {
+        setRestrictedModalTitle(title);
+        setIsRestrictedModalOpen(true);
+      };
+
+      const handleScrollTo = (id) => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      };
+
+      // --- HERO TIMER LOGIC ---
+      const [currentTimePHT, setCurrentTimePHT] = useState('');
+      const [countdownText, setCountdownText] = useState('02h 45m 12s');
+      const [sessionPhase, setSessionPhase] = useState('PRE_MARKET');
+
+      useEffect(() => {
+        const updateTime = () => {
+          const now = new Date();
+          const phtString = now.toLocaleTimeString('en-US', {
+            timeZone: 'Asia/Manila',
+            hour12: true,
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+          });
+          setCurrentTimePHT(phtString);
+
+          const hours = now.getHours();
+          const minutes = now.getMinutes();
+          const totalMinutes = hours * 60 + minutes;
+
+          if (totalMinutes >= 1290 || totalMinutes < 120) {
+            setSessionPhase('ACTIVE_EXECUTION');
+            setCountdownText('SESSION ACTIVE • EXECUTE 1 POSITION');
+          } else if (totalMinutes >= 120 && totalMinutes < 300) {
+            setSessionPhase('NIGHT_CUTOFF');
+            setCountdownText('2:00 AM CUTOFF • CHARTS TERMINATED');
+          } else {
+            setSessionPhase('PRE_MARKET');
+            const targetMin = 1290;
+            const diffMin = (targetMin - totalMinutes + 1440) % 1440;
+            const h = Math.floor(diffMin / 60);
+            const m = diffMin % 60;
+            const s = 59 - now.getSeconds();
+            setCountdownText(`${String(h).padStart(2, '0')}h ${String(m).padStart(2, '0')}m ${String(s).padStart(2, '0')}s`);
+          }
+        };
+
+        updateTime();
+        const interval = setInterval(updateTime, 1000);
+        return () => clearInterval(interval);
+      }, []);
+
+      // --- AUDIT SECTION LOGIC (3-TRADE CAP) ---
+      const [auditCurrency, setAuditCurrency] = useState('PHP');
+      const [auditStartingBalance, setAuditStartingBalance] = useState(500000);
+      const [trades, setTrades] = useState([
+        { id: 't1', date: 'OCT 20, 2026', pair: 'USTECH100', direction: 'BUY', target: '1:3.0', status: 'TP_1_3', pnlR: 3.0, cash: 15000 },
+        { id: 't2', date: 'OCT 21, 2026', pair: 'USTECH100', direction: 'SELL', target: 'BE', status: 'BE_HIT', pnlR: 0.0, cash: 0 },
+        { id: 't3', date: 'OCT 22, 2026', pair: 'USTECH100', direction: 'BUY', target: '1:3.0', status: 'SL_HIT', pnlR: -1.0, cash: -5000 }
+      ]);
+      const [showAddTradeForm, setShowAddTradeForm] = useState(false);
+      const [newTradeDir, setNewTradeDir] = useState('BUY');
+      const [newTradeOutcome, setNewTradeOutcome] = useState('TP_1_3');
+      const [newTradeCustomCash, setNewTradeCustomCash] = useState('');
+      const [newTradeNotes, setNewTradeNotes] = useState('Strictly follow the account budget and RJS');
+
+      const handleSimulateTradeClick = () => {
+        if (trades.length >= 3) {
+          setIsCapacityModalOpen(true);
+        } else {
+          setShowAddTradeForm(!showAddTradeForm);
+        }
+      };
+
+      const handleAddTradeSubmit = (e) => {
+        e.preventDefault();
+        if (trades.length >= 3) {
+          setIsCapacityModalOpen(true);
+          setShowAddTradeForm(false);
+          return;
+        }
+
+        let rVal = 3.0;
+        let targetStr = '1:3.0';
+        let isLoss = false;
+        if (newTradeOutcome === 'SL_HIT') {
+          rVal = -1.0;
+          targetStr = '1:1.0';
+          isLoss = true;
+        } else if (newTradeOutcome === 'BE_HIT') {
+          rVal = 0.0;
+          targetStr = 'BE';
+        } else if (newTradeOutcome === 'TP_1_1') {
+          rVal = 1.0;
+          targetStr = '1:1.0';
+        } else if (newTradeOutcome === 'TP_1_2') {
+          rVal = 2.0;
+          targetStr = '1:2.0';
+        }
+
+        const riskPerTrade = auditStartingBalance * 0.01;
+        let cashAmt = 0;
+        if (newTradeCustomCash.trim() !== '') {
+          const parsed = parseFloat(newTradeCustomCash.replace(/[^0-9.]/g, ''));
+          cashAmt = isNaN(parsed) ? 0 : (isLoss ? -Math.abs(parsed) : Math.abs(parsed));
+        } else {
+          cashAmt = isLoss ? -riskPerTrade : (rVal === 0 ? 0 : rVal * riskPerTrade);
+        }
+
+        const newRec = {
+          id: `t-${Date.now()}`,
+          date: 'OCT 23, 2026',
+          pair: 'USTECH100',
+          direction: newTradeDir,
+          target: targetStr,
+          status: newTradeOutcome,
+          pnlR: rVal,
+          cash: cashAmt
+        };
+
+        setTrades([...trades, newRec]);
+        setShowAddTradeForm(false);
+        setNewTradeCustomCash('');
+      };
+
+      const handleDeleteTrade = (id) => {
+        setTrades(trades.filter(t => t.id !== id));
+      };
+
+      const handleResetTrades = () => {
+        setTrades([
+          { id: 't1', date: 'OCT 20, 2026', pair: 'USTECH100', direction: 'BUY', target: '1:3.0', status: 'TP_1_3', pnlR: 3.0, cash: 15000 },
+          { id: 't2', date: 'OCT 21, 2026', pair: 'USTECH100', direction: 'SELL', target: 'BE', status: 'BE_HIT', pnlR: 0.0, cash: 0 },
+          { id: 't3', date: 'OCT 22, 2026', pair: 'USTECH100', direction: 'BUY', target: '1:3.0', status: 'SL_HIT', pnlR: -1.0, cash: -5000 }
+        ]);
+      };
+
+      const totalCashNet = trades.reduce((acc, t) => acc + t.cash, 0);
+      const netR = trades.reduce((acc, t) => acc + t.pnlR, 0);
+      const currentAuditBalance = auditStartingBalance + totalCashNet;
+      const winCount = trades.filter(t => t.cash > 0).length;
+      const winRate = trades.length > 0 ? Math.round((winCount / trades.length) * 100) : 0;
+
+      // --- RISK CALCULATOR LOGIC ---
+      const [riskStartBal, setRiskStartBal] = useState(10000);
+      const [riskCurrBal, setRiskCurrBal] = useState(10000);
+
+      const maxRiskLoss = riskStartBal * 0.10;
+      const targetRiskProfit = maxRiskLoss * 3;
+      const projectedRiskSL = riskCurrBal - maxRiskLoss;
+      const projectedRiskTP = riskCurrBal + targetRiskProfit;
+
+      const formatPHP = (val) => '₱' + Math.abs(val).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+      // --- PRICING LOGIC ---
+      const [pricingCurr, setPricingCurr] = useState('PHP');
+      const pricingData = {
+        PHP: { standalone: '₱4,000', mentorship: '₱10,000', upgrade: '₱6,000' },
+        USD: { standalone: '$79', mentorship: '$199', upgrade: '$120' }
+      };
+
+      // --- PROTOCOL STEP INSPECTOR LOGIC ---
+      const [selectedProtocolId, setSelectedProtocolId] = useState(1);
+      const activeStepObj = PROTOCOL_STEPS.find(s => s.id === selectedProtocolId) || PROTOCOL_STEPS[0];
+
+      // --- FAQ ACCORDION LOGIC ---
+      const [openFaqIndex, setOpenFaqIndex] = useState(0);
+
+      // --- CLIENT PORTAL SIMULATOR MODAL LOGIC ---
+      const [portalPhase, setPortalPhase] = useState('P1');
+      const [portalActiveModNumber, setPortalActiveModNumber] = useState('01');
+      const [portalKeywordInput, setPortalKeywordInput] = useState('');
+      const [portalAlertMsg, setPortalAlertMsg] = useState('');
+      const [isPortalLockedOverlayOpen, setIsPortalLockedOverlayOpen] = useState(false);
+      const [portalLockedTitle, setPortalLockedTitle] = useState('');
+
+      const activePortalModules = portalPhase === 'P1' ? PHASE_1_MODULES : PHASE_2_MODULES;
+      const activePortalModule = activePortalModules.find(m => m.number === portalActiveModNumber) || activePortalModules[0];
+
+      const triggerPortalLocked = (title) => {
+        setPortalLockedTitle(title || activePortalModule.title);
+        setIsPortalLockedOverlayOpen(true);
+      };
+
+      const handlePortalKeywordSubmit = (e) => {
+        e.preventDefault();
+        setPortalAlertMsg('⚠️ Secret verification keys are issued exclusively inside the enrolled student video lectures. Please enroll to access the verified vault.');
+        triggerPortalLocked(activePortalModule.title);
+      };
+
+      return (
+        <div className="min-h-screen bg-[#050507] text-zinc-100 flex flex-col font-sans">
+          
+          {/* TOP ANNOUNCEMENT BAR */}
+          <div className="w-full bg-[#0b0c10] border-b border-zinc-800/80 px-4 py-2 text-center text-xs tracking-wider uppercase font-mono text-zinc-400 flex flex-wrap items-center justify-center gap-3">
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> NY SESSION PROTOCOL
+            </span>
+            <span className="hidden sm:inline text-zinc-300">Live 90-Min Private Diagnostic Slots Open for Booking</span>
+            <a href="#pricing" className="underline hover:text-white transition-colors duration-200 inline-flex items-center gap-0.5">
+              View Program Options &rarr;
+            </a>
+          </div>
+
+          {/* MAIN NAVBAR */}
+          <header className="sticky top-0 z-40 backdrop-blur-md bg-[#050507]/90 border-b border-zinc-800/60">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+              {/* Brand Logo */}
+              <a href="#" className="flex flex-col items-start group">
+                <span className="font-['Cinzel'] text-2xl font-black tracking-widest text-white group-hover:tracking-wider transition-all duration-300">
+                  RYAN JADE
+                </span>
+                <span className="font-mono text-[9px] tracking-[0.28em] text-zinc-500 uppercase -mt-1 group-hover:text-zinc-300 transition-colors">
+                  MECHANICAL DESK &bull; RJS
+                </span>
+              </a>
+
+              {/* Nav Links */}
+              <nav className="hidden md:flex items-center space-x-7 text-xs lg:text-sm font-medium text-zinc-400">
+                <a href="#curriculum" className="hover:text-white transition-colors">Phases 1 &amp; 2</a>
+                <a href="#pricing" className="hover:text-white transition-colors">Pricing &amp; Options</a>
+                <a href="#protocol" className="hover:text-white transition-colors">The 7-Step Protocol</a>
+                <a href="#audit" className="hover:text-white transition-colors">Student Logs</a>
+                <a href="#calculator" className="hover:text-white transition-colors">Risk Calculator</a>
+                <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
+              </nav>
+
+              {/* Action Buttons */}
+              <div className="flex items-center gap-2 sm:gap-3">
+                <button
+                  onClick={() => setIsPortalModalOpen(true)}
+                  className="hidden sm:inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-mono tracking-wider uppercase text-zinc-300 hover:text-white bg-[#111217] hover:bg-[#171821] border border-zinc-700/60 rounded-lg transition-all cursor-pointer"
+                >
+                  <UserCheck className="w-3.5 h-3.5 text-zinc-400" />
+                  <span>Portal Demo</span>
+                </button>
+
+                {/* ENROLLED TRADER BUTTON */}
+                <a
+                  href="portal.html"
+                  className="inline-flex items-center justify-center gap-2 px-3 sm:px-3.5 py-2 text-xs font-mono font-semibold tracking-wider uppercase text-emerald-400 hover:text-emerald-300 bg-emerald-950/20 hover:bg-emerald-900/35 border border-emerald-500/40 hover:border-emerald-400/80 rounded-lg transition-all shadow-sm"
+                >
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </span>
+                  <span>Enrolled Trader</span>
+                </a>
+
+                <button
+                  onClick={() => handleScrollTo('pricing')}
+                  className="inline-flex items-center justify-center px-3.5 sm:px-5 py-2 sm:py-2.5 text-xs font-semibold tracking-wider uppercase text-black bg-white hover:bg-zinc-200 rounded-lg shadow-sm transition-all cursor-pointer"
+                >
+                  <span>Claim Slot</span>
+                </button>
+              </div>
+            </div>
+          </header>
+
+          <main className="flex-1">
+            {/* HERO SECTION */}
+            <section className="relative pt-16 pb-16 md:pt-24 md:pb-20 bg-grid-pattern overflow-hidden">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#111217]/90 border border-zinc-700/70 text-xs font-mono text-zinc-300 mb-6 shadow-inner">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                  <span className="tracking-wide text-zinc-300">1 Trade A Day &bull; Strict 9:30 PM Rule &bull; 1:3 RRR Focus</span>
+                </div>
+
+                {/* Countdown */}
+                <div className="mb-8 inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-[#0b0c10]/95 border border-zinc-800 backdrop-blur-md shadow-lg">
+                  <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
+                    <Clock className="w-3.5 h-3.5 text-amber-400" />
+                    <span className="hidden sm:inline">PHT Desk Time:</span>
+                    <span className="text-white font-semibold">{currentTimePHT || '09:15:00 PM'}</span>
+                  </div>
+                  <span className="text-zinc-700">|</span>
+                  <div className="flex items-center gap-2 text-xs font-mono">
+                    {sessionPhase === 'ACTIVE_EXECUTION' ? (
+                      <span className="inline-flex items-center gap-1.5 text-emerald-400 font-bold">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        ACTIVE EXECUTION WINDOW
+                      </span>
+                    ) : sessionPhase === 'NIGHT_CUTOFF' ? (
+                      <span className="inline-flex items-center gap-1.5 text-zinc-400">
+                        <span className="w-2 h-2 rounded-full bg-zinc-500"></span>
+                        2:00 AM LOCKOUT REACHED
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1.5 text-amber-300">
+                        <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                        COUNTDOWN TO 9:30 PM: <strong className="text-white font-mono">{countdownText}</strong>
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Heading */}
+                <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-5xl mx-auto leading-[1.08] mb-6">
+                  Stop Overtrading.<br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 via-zinc-300 to-zinc-600">
+                    Execute The 9:30 PM RJS Strategy and Rules.
+                  </span>
+                </h1>
+
+                {/* 1:1:1:1 Execution Architecture */}
+                <div className="max-w-4xl mx-auto my-8">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-[11px] font-mono text-amber-300 uppercase tracking-widest mb-4">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+                    The RJS 1 : 1 : 1 : 1 Execution Architecture
+                  </div>
+
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-left font-mono">
+                    <div className="p-3.5 rounded-2xl bg-[#0b0c10] border border-amber-500/20 shadow-sm">
+                      <span className="text-[10px] text-amber-400 font-bold uppercase tracking-wider block">1 PAIR</span>
+                      <span className="text-sm font-bold text-white block mt-0.5">USTECH100</span>
+                      <span className="text-[10px] text-zinc-400 block mt-0.5 font-sans">NAS100 Pure Focus</span>
+                    </div>
+                    <div className="p-3.5 rounded-2xl bg-[#0b0c10] border border-amber-500/20 shadow-sm">
+                      <span className="text-[10px] text-amber-400 font-bold uppercase tracking-wider block">1 SESSION</span>
+                      <span className="text-sm font-bold text-white block mt-0.5">NY OPEN</span>
+                      <span className="text-[10px] text-zinc-400 block mt-0.5 font-sans">Strict Post-9:30 PM PHT</span>
+                    </div>
+                    <div className="p-3.5 rounded-2xl bg-[#0b0c10] border border-amber-500/20 shadow-sm">
+                      <span className="text-[10px] text-amber-400 font-bold uppercase tracking-wider block">1 STRATEGY</span>
+                      <span className="text-sm font-bold text-white block mt-0.5">RJS STRATEGY</span>
+                      <span className="text-[10px] text-zinc-400 block mt-0.5 font-sans">strictly 1 strategy only</span>
+                    </div>
+                    <div className="p-3.5 rounded-2xl bg-[#0b0c10] border border-amber-500/20 shadow-sm">
+                      <span className="text-[10px] text-amber-400 font-bold uppercase tracking-wider block">1 TRADE</span>
+                      <span className="text-sm font-bold text-white block mt-0.5">1 POSITION / DAY</span>
+                      <span className="text-[10px] text-zinc-400 block mt-0.5 font-sans">1 position/entry only</span>
+                    </div>
+                  </div>
+
+                  <p className="max-w-2xl mx-auto text-[16px] text-zinc-300 font-normal leading-relaxed text-center mt-6">
+                    Profitable trading isn’t luck—it's made possible by a great strategy that has rules aligned to you and the market. This program does not only teach you how to trade properly, but it also offers you a well-planned strategy and strict rules to eliminate overtrading and revenge trading.
+                  </p>
+                </div>
+
+                {/* CTAs */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 flex-wrap">
+                  <a
+                    href="#mentorship"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-bold tracking-wider uppercase text-black bg-white hover:bg-zinc-200 rounded-xl shadow-lg transition-all cursor-pointer"
+                  >
+                    <span>Enroll In Full Mentorship</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+
+                  {/* HERO ENROLLED TRADER BUTTON */}
+                  <a
+                    href="portal.html"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-4 text-sm font-mono font-semibold tracking-wider uppercase text-emerald-400 hover:text-emerald-300 bg-emerald-950/20 hover:bg-emerald-900/35 border border-emerald-500/40 hover:border-emerald-400 rounded-xl transition-all shadow-md shadow-emerald-950/30"
+                  >
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span>Enrolled Trader</span>
+                  </a>
+
+                  <a
+                    href="#pricing"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 text-sm font-semibold tracking-wider uppercase text-zinc-300 bg-[#111217] hover:bg-[#171821] border border-zinc-700/70 hover:border-zinc-500 rounded-xl transition-all"
+                  >
+                    <span>Explore Standalone Vault</span>
+                    <Video className="w-4 h-4 text-zinc-400" />
+                  </a>
+                </div>
+
+              </div>
+            </section>
+
+            {/* CURRICULUM SECTION (LOCKED INTELLECTUAL PROPERTY) */}
+            <section id="curriculum" className="py-24 border-t border-zinc-800/80 bg-[#050507]">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div className="text-center max-w-3xl mx-auto mb-16">
+                  <span className="text-xs font-mono uppercase tracking-[0.25em] text-zinc-400">Curriculum Syllabus</span>
+                  <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-2">
+                    Two Phases. Zero Ambiguity.
+                  </h2>
+                  <p className="text-zinc-400 text-sm sm:text-base mt-3">
+                    High-value institutional curriculum syllabus. Proprietary formulas, execution worksheets, and video masterclasses are unlocked upon enrollment.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                  
+                  {/* Phase 1 Card */}
+                  <div className="p-8 rounded-3xl bg-[#0b0c10] border border-zinc-800 flex flex-col justify-between relative overflow-hidden">
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="px-3 py-1 rounded-full text-xs font-mono tracking-wider uppercase bg-amber-500/10 text-amber-300 border border-amber-500/30">
+                          Phase 01
+                        </span>
+                        <span className="text-xs font-mono text-zinc-500">Foundation &bull; 7 Modules</span>
+                      </div>
+
+                      <h3 className="text-2xl font-bold text-white">Discipline Building &amp; Mechanical Execution</h3>
+                      <p className="text-zinc-400 text-sm mt-2 leading-relaxed">
+                        Transforming discretionary gambling habits into mechanical, repeatable trading data through 1 trade/day discipline.
+                      </p>
+
+                      <div className="mt-8 space-y-3 font-mono text-xs">
+                        {PHASE_1_MODULES.map((mod) => (
+                          <div
+                            key={mod.number}
+                            onClick={() => handleOpenRestricted(mod.title)}
+                            className="p-4 rounded-2xl bg-[#111217] border border-zinc-800/80 hover:border-amber-500/50 hover:bg-[#151622] transition-all cursor-pointer group shadow-sm select-none"
+                          >
+                            <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                              <div className="flex items-center gap-2">
+                                <span className="w-6 h-6 rounded flex items-center justify-center text-[10px] font-bold bg-amber-500/10 text-amber-400">
+                                  {mod.number}
+                                </span>
+                                <span className="text-[10px] text-zinc-500 uppercase">{mod.duration}</span>
+                              </div>
+                              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/30">
+                                <Lock className="w-2.5 h-2.5 text-amber-400" />
+                                <span>🔒 Unlocked inside Student Portal</span>
+                              </span>
+                            </div>
+                            <h4 className="text-sm font-bold text-zinc-200 group-hover:text-white transition-colors">
+                              {mod.title}
+                            </h4>
+                            <p className="text-xs text-zinc-400 mt-1 font-sans">
+                              {mod.summary}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="mt-8 pt-6 border-t border-zinc-800/80 flex items-center gap-3.5">
+                      <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center flex-shrink-0">
+                        <PhoneCall className="w-5 h-5" />
+                      </div>
+                      <p className="text-xs text-zinc-300">
+                        <strong className="text-white block font-sans text-sm">Includes 1st 90-Min Private Call (Full Program):</strong>
+                        <span>Diagnostic review of your 20-trade journal &amp; mechanical audit with Ryan Jade.</span>
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Phase 2 Card */}
+                  <div className="p-8 rounded-3xl bg-[#0b0c10] border border-zinc-800 flex flex-col justify-between relative overflow-hidden">
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="px-3 py-1 rounded-full text-xs font-mono tracking-wider uppercase bg-amber-500/10 text-amber-300 border border-amber-500/30">
+                          Phase 02
+                        </span>
+                        <span className="text-xs font-mono text-zinc-500">Advanced Swing &bull; High RRR</span>
+                      </div>
+
+                      <h3 className="text-2xl font-bold text-white">Swing Execution &amp; Scale Systems</h3>
+                      <p className="text-zinc-400 text-sm mt-2 leading-relaxed">
+                        Expanding your mechanical edge into swing POIs, structural liquidity, and maximizing 1:4 and 1:5 asymmetrical setups.
+                      </p>
+
+                      <div className="mt-8 space-y-3 font-mono text-xs">
+                        {PHASE_2_MODULES.map((mod) => (
+                          <div
+                            key={mod.number}
+                            onClick={() => handleOpenRestricted(mod.title)}
+                            className="p-4 rounded-2xl bg-[#111217] border border-zinc-800/80 hover:border-amber-500/50 hover:bg-[#151622] transition-all cursor-pointer group shadow-sm select-none"
+                          >
+                            <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                              <div className="flex items-center gap-2">
+                                <span className="w-6 h-6 rounded flex items-center justify-center text-[10px] font-bold bg-amber-500/10 text-amber-400">
+                                  {mod.number}
+                                </span>
+                                <span className="text-[10px] text-zinc-500 uppercase">{mod.duration}</span>
+                              </div>
+                              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/30">
+                                <Lock className="w-2.5 h-2.5 text-amber-400" />
+                                <span>🔒 Unlocked inside Student Portal</span>
+                              </span>
+                            </div>
+                            <h4 className="text-sm font-bold text-zinc-200 group-hover:text-white transition-colors">
+                              {mod.title}
+                            </h4>
+                            <p className="text-xs text-zinc-400 mt-1 font-sans">
+                              {mod.summary}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="mt-8 pt-6 border-t border-zinc-800/80 flex items-center gap-3.5">
+                      <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center flex-shrink-0">
+                        <Award className="w-5 h-5" />
+                      </div>
+                      <p className="text-xs text-zinc-300">
+                        <strong className="text-white block font-sans text-sm">Includes 2nd 90-Min Private Call (Full Program):</strong>
+                        <span>Advanced capital scale roadmap, prop firm audit prep, and long-term trajectory.</span>
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </section>
+
+            {/* PRICING & OPTIONS SECTION */}
+            <section id="pricing" className="py-24 border-t border-zinc-800/80 bg-[#050507]">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div className="text-center max-w-3xl mx-auto mb-16">
+                  <span className="text-xs font-mono uppercase tracking-[0.25em] text-zinc-400">Investment Options</span>
+                  <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-2">
+                    One Program. Two Ways To Join.
+                  </h2>
+                  <p className="text-zinc-400 text-sm sm:text-base mt-3">
+                    Choose between 100% self-study in the standalone video vault or complete 1-on-1 diagnostic mentorship with Ryan Jade.
+                  </p>
+
+                  <div className="inline-flex items-center gap-1 p-1 rounded-xl bg-[#0b0c10] border border-zinc-800 mt-6 text-xs font-mono">
+                    <button
+                      onClick={() => setPricingCurr('PHP')}
+                      className={`px-4 py-1.5 rounded-lg font-bold transition-all cursor-pointer ${
+                        pricingCurr === 'PHP' ? 'bg-white text-black shadow' : 'text-zinc-400 hover:text-white'
+                      }`}
+                    >
+                      PHP (₱)
+                    </button>
+                    <button
+                      onClick={() => setPricingCurr('USD')}
+                      className={`px-4 py-1.5 rounded-lg font-bold transition-all cursor-pointer ${
+                        pricingCurr === 'USD' ? 'bg-white text-black shadow' : 'text-zinc-400 hover:text-white'
+                      }`}
+                    >
+                      USD ($)
+                    </button>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch pt-4">
+                  
+                  {/* Standalone Vault (₱4,000) */}
+                  <div id="standalone" className="p-8 sm:p-10 rounded-3xl bg-[#0b0c10] border border-zinc-800/90 flex flex-col justify-between hover:border-zinc-700/80 transition-all">
+                    <div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-mono uppercase tracking-wider text-zinc-500 font-semibold">Option 02</span>
+                        <span className="px-3 py-1 rounded-full text-[11px] font-mono bg-zinc-800/80 text-zinc-400 border border-zinc-700/60">
+                          SELF-STUDY VAULT
+                        </span>
+                      </div>
+
+                      <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-3">Standalone Video Vault</h3>
+                      <p className="text-zinc-400 text-sm mt-2 leading-relaxed">
+                        Direct, self-paced access to both Phase 1 and Phase 2 curriculum, fillable worksheets, and execution logs.
+                      </p>
+
+                      <div className="mt-6 mb-8">
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-4xl sm:text-5xl font-black text-white font-mono">{pricingData[pricingCurr].standalone}</span>
+                          <span className="text-zinc-400 text-xs font-mono">ONE-TIME ACCESS</span>
+                        </div>
+                        <p className="text-[12px] text-zinc-500 font-mono mt-1">Lifetime updates &bull; No recurring subscription</p>
+                      </div>
+
+                      <div className="space-y-3.5 text-sm">
+                        <div className="flex items-center gap-3">
+                          <Check className="w-4 h-4 text-zinc-300" />
+                          <span className="text-zinc-300">Phase 1 &amp; Phase 2 Video Library (Self-Study Access)</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <Check className="w-4 h-4 text-zinc-300" />
+                          <span className="text-zinc-300">Interactive 20-Trade Fillable PDF Execution Sheet</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <Check className="w-4 h-4 text-zinc-300" />
+                          <span className="text-zinc-300">Secret Single-Word Verification Checklists</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <Check className="w-4 h-4 text-zinc-300" />
+                          <span className="text-zinc-300">Weekly Forex Factory Risk Mitigation Rules</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-10 pt-6 border-t border-zinc-800">
+                      <div className="p-3.5 rounded-xl bg-[#111217] border border-zinc-700/60 text-xs text-zinc-300 mb-6">
+                        <span className="text-amber-400 font-bold">100% Credit Clause:</span> If you decide to upgrade to Full Mentorship within 30 days, 100% of this fee is deducted!
+                      </div>
+                      <a
+                        href="https://www.paypal.com/ncp/payment/5J576YB7X75Q2"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-4 text-xs font-bold tracking-wider uppercase text-zinc-200 bg-[#171821] hover:bg-[#222330] border border-zinc-700 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-2 text-center"
+                      >
+                        <span>INSTANT ACCESS TO VAULT ({pricingData[pricingCurr].standalone})</span>
+                        <ArrowRight className="w-4 h-4 text-zinc-400" />
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Full Mentorship (₱10,000) */}
+                  <div id="mentorship" className="scroll-mt-24 p-8 sm:p-10 rounded-3xl bg-[#0c0d12] border-2 border-amber-400/90 flex flex-col justify-between shadow-[0_0_60px_-15px_rgba(245,158,11,0.22)] relative">
+                    <div className="absolute -top-3.5 right-6 sm:right-8 z-30 px-4 py-1.5 rounded-full bg-amber-400 text-black font-mono font-black text-[11px] tracking-wider uppercase shadow-xl flex items-center gap-1.5">
+                      <Zap className="w-3.5 h-3.5 fill-black" />
+                      <span>RECOMMENDED &bull; FULL PROTOCOL</span>
+                    </div>
+
+                    <div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold">Option 01</span>
+                        <span className="px-3.5 py-1 rounded-full text-[11px] font-mono font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/40">
+                          LIVE GUIDANCE INCLUDED
+                        </span>
+                      </div>
+
+                      <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-3">Full Mentorship Experience</h3>
+                      <p className="text-zinc-300 text-sm mt-2 leading-relaxed">
+                        The complete personal immersion with live guidance, daily market context, uncapped private DM access, and continuous live accountability.
+                      </p>
+
+                      <div className="mt-6 mb-8 py-4 px-5 rounded-2xl bg-[#111217] border border-amber-500/25">
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-4xl sm:text-5xl font-black text-white font-mono">{pricingData[pricingCurr].mentorship}</span>
+                          <span className="text-amber-400 text-xs font-mono font-bold">COMPLETE PROGRAM</span>
+                        </div>
+                        <p className="text-[12px] text-zinc-300 font-mono mt-1">Includes both Phase 1 &amp; 2 Private 90-Min Calls</p>
+                      </div>
+
+                      <div className="space-y-3.5 text-sm">
+                        <div className="flex items-start gap-3">
+                          <Check className="w-4 h-4 text-emerald-400 mt-0.5" />
+                          <span className="text-zinc-100 font-medium">TWO 90-Minute 1-on-1 Diagnostic Calls with Ryan Jade (1 per phase)</span>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <Check className="w-4 h-4 text-emerald-400 mt-0.5" />
+                          <span className="text-zinc-100 font-medium">Phase 1 &amp; Phase 2 Video Library with live guide from Ryan Jade</span>
+                        </div>
+                        <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-500/20 via-amber-500/10 to-emerald-500/15 border border-amber-500/50 flex items-start gap-3.5">
+                          <Flame className="w-4 h-4 text-amber-400 mt-0.5" />
+                          <div>
+                            <strong className="text-amber-300 uppercase tracking-wider block font-mono text-xs font-bold mb-1">
+                              🔥 UNLIMITED 1-ON-1 TELEGRAM DMs
+                            </strong>
+                            <p className="text-zinc-200 text-sm">
+                              Continuous, uncapped direct feedback. Send your charts as setups develop and get direct eyes on your execution.
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <Check className="w-4 h-4 text-emerald-400 mt-0.5" />
+                          <span className="text-zinc-100 font-medium">Daily Tradable Chart Markups &amp; Market Bias (Every single tradable day)</span>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <Check className="w-4 h-4 text-emerald-400 mt-0.5" />
+                          <span className="text-zinc-100 font-medium">Open-Line Google Meet (GMeet) Sessions (Live screen-share reviews)</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-10 pt-6 border-t border-zinc-800">
+                      <a
+                        href="https://www.paypal.com/ncp/payment/7CHH7A3H95SMW"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-4 text-xs font-bold tracking-wider uppercase text-zinc-200 bg-[#171821] hover:bg-[#222330] border border-amber-500/50 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-2 text-center"
+                      >
+                        <span>START THE PROGRAM NOW AND SECURE A SLOT →</span>
+                      </a>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </section>
+
+            {/* THE 7-STEP PROTOCOL SECTION */}
+            <section id="protocol" className="py-24 border-t border-zinc-800/80 bg-[#0b0c10]/40">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div className="text-center max-w-3xl mx-auto mb-16">
+                  <span className="text-xs font-mono uppercase tracking-[0.25em] text-zinc-400">Mechanical Blueprint</span>
+                  <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-2">
+                    The 7-Step Execution Sequence
+                  </h2>
+                  <p className="text-zinc-400 text-sm sm:text-base mt-3">
+                    We do not predict, guess, or hold open-ended hope. We follow a strict systematic order on every single execution.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {PROTOCOL_STEPS.slice(0, 6).map((step) => (
+                    <div
+                      key={step.id}
+                      onClick={() => setSelectedProtocolId(step.id)}
+                      className={`p-6 rounded-2xl bg-[#0b0c10] border transition-all cursor-pointer group ${
+                        selectedProtocolId === step.id ? 'border-white/80 ring-1 ring-white/30' : 'border-zinc-800 hover:border-zinc-700'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between mb-4">
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-mono font-bold text-sm ${
+                          selectedProtocolId === step.id ? 'bg-white text-black' : 'bg-[#171821] text-white border border-zinc-700'
+                        }`}>
+                          {step.stepNumber}
+                        </div>
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700">
+                          {step.badge}
+                        </span>
+                      </div>
+                      <h3 className="text-lg font-bold text-zinc-100 flex items-center justify-between">
+                        <span>{step.title}</span>
+                        <ChevronRight className={`w-4 h-4 text-zinc-500 transition-transform ${selectedProtocolId === step.id ? 'rotate-90 text-white' : ''}`} />
+                      </h3>
+                      <p className="text-xs font-mono text-amber-400/90 mt-1">{step.timing}</p>
+                      <p className="text-sm text-zinc-400 mt-3 leading-relaxed">{step.description}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Step 7 Banner */}
+                <div
+                  onClick={() => setSelectedProtocolId(7)}
+                  className={`mt-8 p-7 rounded-2xl bg-gradient-to-r from-[#0b0c10] via-[#111217] to-[#0b0c10] border transition-all flex flex-col md:flex-row items-center justify-between gap-6 cursor-pointer ${
+                    selectedProtocolId === 7 ? 'border-white/90 ring-1 ring-white/40' : 'border-zinc-700/80 hover:border-zinc-600'
+                  }`}
+                >
+                  <div className="flex items-center gap-5">
+                    <div className="w-14 h-14 rounded-2xl bg-white text-black flex items-center justify-center font-mono font-black text-xl flex-shrink-0">
+                      07
+                    </div>
+                    <div>
+                      <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold">The Core Rule</span>
+                      <h4 className="text-xl font-bold text-white">Execute &amp; Close The Day</h4>
+                      <p className="text-sm text-zinc-400 mt-1">
+                        &bull; If Win: 1:3 RRR banked. Close charts.<br />
+                        &bull; If Loss: Invalidation triggered. Close charts and log it. We come back tomorrow.
+                      </p>
+                    </div>
+                  </div>
+                  <span className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#171821] border border-zinc-700 text-xs font-mono text-zinc-300">
+                    <Lock className="w-4 h-4 text-amber-400" />
+                    2:00 AM Breakeven Lockout Mandatory
+                  </span>
+                </div>
+
+                {/* Step Deep-Dive Inspector */}
+                <div className="mt-10 p-6 sm:p-8 rounded-3xl bg-[#07080b] border border-zinc-700/80 shadow-2xl">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 border-b border-zinc-800 gap-3">
+                    <div className="flex items-center gap-3">
+                      <span className="px-2.5 py-1 rounded-lg bg-white/10 text-white font-mono font-bold text-xs">
+                        STEP {activeStepObj.stepNumber} INSPECTION
+                      </span>
+                      <h4 className="text-lg font-bold text-white">{activeStepObj.title}</h4>
+                    </div>
+                    <span className="text-xs font-mono text-zinc-400 bg-[#111217] px-3 py-1 rounded-lg border border-zinc-800">
+                      Timing: {activeStepObj.timing}
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div className="space-y-4">
+                      <div className="p-4 rounded-xl bg-[#0b0c10] border border-zinc-800">
+                        <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 mb-1">
+                          <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
+                          <span className="font-semibold uppercase text-zinc-300">Mandatory Rule</span>
+                        </div>
+                        <p className="text-sm text-zinc-300 leading-relaxed">{activeStepObj.deepDive.rule}</p>
+                      </div>
+                      <div className="p-4 rounded-xl bg-[#0b0c10] border border-zinc-800">
+                        <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 mb-1">
+                          <Eye className="w-3.5 h-3.5 text-sky-400" />
+                          <span className="font-semibold uppercase text-zinc-300">Operational Action</span>
+                        </div>
+                        <p className="text-sm text-zinc-300 leading-relaxed">{activeStepObj.deepDive.action}</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="p-4 rounded-xl bg-[#0b0c10] border border-zinc-800">
+                        <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 mb-1">
+                          <AlertCircle className="w-3.5 h-3.5 text-amber-400" />
+                          <span className="font-semibold uppercase text-zinc-300">Invalidation Threshold</span>
+                        </div>
+                        <p className="text-sm text-zinc-300 leading-relaxed">{activeStepObj.deepDive.invalidation}</p>
+                      </div>
+                      <div className="p-4 rounded-xl bg-[#140b0b] border border-red-900/40">
+                        <div className="flex items-center gap-2 text-xs font-mono text-red-400 mb-1">
+                          <XCircle className="w-3.5 h-3.5 text-red-400" />
+                          <span className="font-semibold uppercase text-red-300">Fatal Mistake to Avoid</span>
+                        </div>
+                        <p className="text-sm text-red-200/90 leading-relaxed">{activeStepObj.deepDive.mistakeToAvoid}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </section>
+
+            {/* INTERACTIVE STUDENT AUDIT SHEET (HARD 3-TRADE DEMO CAP) */}
+            <section id="audit" className="py-24 border-t border-zinc-800/80 bg-[#0b0c10]/30">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div className="flex flex-col lg:flex-row items-start lg:items-center gap-12">
+                  
+                  <div className="w-full lg:w-1/2">
+                    <span className="text-xs font-mono uppercase tracking-[0.25em] text-zinc-400">Accountability System</span>
+                    <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-2 leading-tight">
+                      No Guesswork.<br />Every Single Trade Is Audited.
+                    </h2>
+                    <p className="text-zinc-400 text-sm sm:text-base mt-4 leading-relaxed">
+                      Students receive custom interactive fillable PDFs. You don't just "watch" lessons—you input live execution metrics, submit verification keywords, and prove mechanical obedience before unlocking higher stages.
+                    </p>
+
+                    <div className="mt-8 space-y-4 font-sans">
+                      <div className="flex items-start gap-3.5">
+                        <Check className="w-4 h-4 text-emerald-400 mt-1 flex-shrink-0" />
+                        <div>
+                          <h4 className="text-sm font-bold text-white">Fillable 20-Trade Execution Journal</h4>
+                          <p className="text-xs text-zinc-400 mt-0.5">Interactive digital PDF tracking 100% of entries, fixed SL, TP, and RRR compliance.</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3.5">
+                        <Check className="w-4 h-4 text-emerald-400 mt-1 flex-shrink-0" />
+                        <div>
+                          <h4 className="text-sm font-bold text-white">Secret Single-Word Verification Keying</h4>
+                          <p className="text-xs text-zinc-400 mt-0.5">Each video module contains a secret keyword to confirm 100% curriculum completion.</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3.5">
+                        <Check className="w-4 h-4 text-emerald-400 mt-1 flex-shrink-0" />
+                        <div>
+                          <h4 className="text-sm font-bold text-white">Weekly Forex Factory Risk Clearances</h4>
+                          <p className="text-xs text-zinc-400 mt-0.5">Standardized weekly protocol PDFs telling you explicitly: Tradable, Caution, or Stand-Down.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-8 flex flex-wrap items-center gap-3 font-mono text-xs">
+                      <button
+                        onClick={handleSimulateTradeClick}
+                        className="px-4 py-2.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-bold flex items-center gap-1.5 cursor-pointer"
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                        <span>Simulate Logging Trade</span>
+                      </button>
+                      <button
+                        onClick={handleResetTrades}
+                        className="px-3.5 py-2.5 rounded-xl bg-[#111217] hover:bg-[#171821] border border-zinc-700 text-zinc-400 hover:text-white flex items-center gap-1.5 cursor-pointer"
+                      >
+                        <RefreshCw className="w-3.5 h-3.5" />
+                        <span>Reset Sample Data</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Audit Mockup */}
+                  <div className="w-full lg:w-1/2">
+                    <div className="p-6 sm:p-7 rounded-3xl bg-[#050507] border border-zinc-700/80 shadow-2xl font-mono text-xs">
+                      
+                      <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-zinc-800">
+                        <div className="flex items-center gap-2">
+                          <span className="w-3 h-3 rounded-full bg-red-500/80"></span>
+                          <span className="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+                          <span className="w-3 h-3 rounded-full bg-green-500/80"></span>
+                          <span className="ml-2 text-zinc-300 font-bold text-[11px]">RJS_EXECUTION_AUDIT.PDF</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-amber-400 text-[10px] bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30 font-semibold flex items-center gap-1">
+                            <Lock className="w-2.5 h-2.5" /> DEMO CAP: {trades.length}/3 TRADES
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Top Balances */}
+                      <div className="my-4 p-3.5 rounded-2xl bg-[#0c0d12] border border-zinc-800 space-y-2.5">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                          <div className="bg-[#050608] border border-zinc-700/80 rounded-xl p-2.5">
+                            <span className="text-[9px] text-zinc-400 font-bold block uppercase">STARTING BALANCE</span>
+                            <span className="text-white font-mono font-bold text-sm">₱{auditStartingBalance.toLocaleString()}</span>
+                          </div>
+                          <div className="bg-emerald-950/20 border border-emerald-500/50 rounded-xl p-2.5">
+                            <span className="text-[9px] text-zinc-400 font-bold block uppercase">CURRENT BALANCE</span>
+                            <span className="text-emerald-400 font-mono font-bold text-sm">₱{currentAuditBalance.toLocaleString()}</span>
+                          </div>
+                          <div className="bg-[#050608] border border-zinc-700/80 rounded-xl p-2.5">
+                            <span className="text-[9px] text-zinc-400 font-bold block uppercase">TOTAL RETURN</span>
+                            <span className={`font-mono font-bold text-sm ${totalCashNet >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                              {totalCashNet >= 0 ? `+₱${totalCashNet.toLocaleString()}` : `-₱${Math.abs(totalCashNet).toLocaleString()}`}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Log New Trade Form */}
+                      {showAddTradeForm && (
+                        <form onSubmit={handleAddTradeSubmit} className="mb-4 p-4 rounded-xl bg-[#111217] border border-zinc-700 space-y-3">
+                          <div className="flex items-center justify-between">
+                            <span className="text-white font-bold text-[11px] flex items-center gap-1.5">
+                              <Plus className="w-3 h-3 text-emerald-400" /> Log New Mechanical Trade
+                            </span>
+                            <button type="button" onClick={() => setShowAddTradeForm(false)} className="text-zinc-500 hover:text-white">✕</button>
+                          </div>
+                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                            <div>
+                              <label className="text-[10px] text-zinc-400 block mb-1">DIRECTION</label>
+                              <select value={newTradeDir} onChange={(e) => setNewTradeDir(e.target.value)} className="w-full bg-[#0b0c10] border border-zinc-700 rounded px-2 py-1.5 text-white text-[11px]">
+                                <option value="BUY">BUY</option>
+                                <option value="SELL">SELL</option>
+                              </select>
+                            </div>
+                            <div>
+                              <label className="text-[10px] text-zinc-400 block mb-1">OUTCOME</label>
+                              <select value={newTradeOutcome} onChange={(e) => setNewTradeOutcome(e.target.value)} className="w-full bg-[#0b0c10] border border-zinc-700 rounded px-2 py-1.5 text-white text-[11px]">
+                                <option value="SL_HIT">SL (-1.0R)</option>
+                                <option value="BE_HIT">BE (0.0R)</option>
+                                <option value="TP_1_1">TP 1:1 (+1.0R)</option>
+                                <option value="TP_1_2">TP 1:2 (+2.0R)</option>
+                                <option value="TP_1_3">TP 1:3 (+3.0R)</option>
+                              </select>
+                            </div>
+                            <div>
+                              <label className="text-[10px] text-zinc-400 block mb-1">P&amp;L (₱)</label>
+                              <input
+                                type="text"
+                                value={newTradeCustomCash}
+                                onChange={(e) => setNewTradeCustomCash(e.target.value)}
+                                placeholder="Auto (or custom ₱)"
+                                className="w-full bg-[#0b0c10] border border-zinc-700 rounded px-2 py-1.5 text-white text-[11px]"
+                              />
+                            </div>
+                          </div>
+                          <button type="submit" className="w-full py-2 bg-emerald-500 hover:bg-emerald-600 text-black font-bold text-[11px] rounded uppercase cursor-pointer">
+                            Commit Trade To Audit Record
+                          </button>
+                        </form>
+                      )}
+
+                      {/* Trade Table */}
+                      <div className="space-y-1.5 max-h-[220px] overflow-y-auto">
+                        <div className="grid grid-cols-12 text-[10px] text-zinc-500 pb-1 border-b border-zinc-900 font-semibold uppercase">
+                          <span className="col-span-3"># / DATE</span>
+                          <span className="col-span-3">PAIR</span>
+                          <span className="col-span-3">OUTCOME</span>
+                          <span className="col-span-2 text-right">P&amp;L</span>
+                          <span className="col-span-1 text-center">DEL</span>
+                        </div>
+                        {trades.map((item, idx) => (
+                          <div key={item.id} className="grid grid-cols-12 text-zinc-300 py-1.5 border-b border-zinc-900/60 items-center text-[11px]">
+                            <span className="col-span-3 text-zinc-500 font-mono text-[10px]">{String(idx + 1).padStart(2, '0')} / {item.date.split(',')[0]}</span>
+                            <span className="col-span-3 font-semibold text-white tracking-wider flex items-center gap-1 text-[10px]">
+                              <Lock className="w-2 h-2 text-amber-400" />
+                              {item.pair}
+                            </span>
+                            <span className={`col-span-3 font-mono text-[10px] font-semibold ${item.cash > 0 ? 'text-emerald-400' : item.cash < 0 ? 'text-rose-400' : 'text-amber-400'}`}>
+                              {item.status === 'SL_HIT' ? 'SL (-1.0R)' : item.status === 'BE_HIT' ? 'BE (0.0R)' : 'TP 1:3 (+3.0R)'}
+                            </span>
+                            <span className={`col-span-2 text-right font-bold font-mono text-[11px] ${item.cash > 0 ? 'text-emerald-400' : item.cash < 0 ? 'text-rose-400' : 'text-zinc-400'}`}>
+                              {item.cash >= 0 ? `+₱${item.cash.toLocaleString()}` : `-₱${Math.abs(item.cash).toLocaleString()}`}
+                            </span>
+                            <div className="col-span-1 flex items-center justify-center">
+                              <button onClick={() => handleDeleteTrade(item.id)} className="text-zinc-600 hover:text-rose-400">
+                                <Trash2 className="w-3 h-3" />
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Footer Summary */}
+                      <div className="mt-5 p-3 rounded-xl bg-[#0b0c10] border border-zinc-800 text-[11px] text-zinc-400 flex items-center justify-between">
+                        <span>DEMO AUDIT: <strong className="text-white">{trades.length} / 3 TRADES</strong></span>
+                        <span>WIN RATE: <strong className="text-white">{winRate}%</strong></span>
+                        <span>NET: <strong className={totalCashNet >= 0 ? 'text-emerald-400' : 'text-rose-400'}>{totalCashNet >= 0 ? `+₱${totalCashNet.toLocaleString()}` : `-₱${Math.abs(totalCashNet).toLocaleString()}`} ({netR >= 0 ? `+${netR}R` : `${netR}R`})</strong></span>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </section>
+
+            {/* MECHANICAL POSITION SIZING & RISK CALCULATOR SECTION */}
+            <section id="calculator" className="py-24 border-t border-zinc-800/80 bg-[#050507]">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div className="text-center max-w-3xl mx-auto mb-14">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-mono mb-3">
+                    <Lock className="w-3.5 h-3.5 text-amber-400" />
+                    <span>MANDATORY PRE-SESSION DEFENSE PROTOCOL</span>
+                  </div>
+                  <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    Pre-Trade Capital Defense &amp; 1:3 Target Clearance
+                  </h2>
+                  <p className="text-zinc-400 text-sm sm:text-base mt-3 leading-relaxed">
+                    Mandatory pre-session risk check. Verify your exact risk threshold and profit target before taking any position at 9:30 PM.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch max-w-5xl mx-auto">
+                  
+                  {/* Left Column Inputs */}
+                  <div className="lg:col-span-5 p-6 sm:p-8 rounded-3xl bg-[#0b0c10] border border-zinc-800 flex flex-col justify-between space-y-6">
+                    <div className="space-y-6">
+                      <div className="flex items-center justify-between pb-4 border-b border-zinc-800">
+                        <span className="font-mono text-xs uppercase text-zinc-300 font-semibold flex items-center gap-2">
+                          <ShieldCheck className="w-4 h-4 text-emerald-400" /> Pre-Flight Clearance Inputs
+                        </span>
+                        <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300">
+                          PHP (₱) ONLY
+                        </span>
+                      </div>
+
+                      {/* Protocol Note */}
+                      <div className="p-3.5 rounded-2xl bg-[#11131a] border border-cyan-500/30 text-xs font-mono text-cyan-200/90 flex items-start gap-2.5">
+                        <Lock className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <span className="font-semibold text-white block mb-0.5 text-[11px] uppercase">Protocol Enforced</span>
+                          Asset: <strong className="text-white">USTECH100 (NAS100)</strong> | Session: <strong className="text-white">9:30 PM NY Open</strong> | Model: <strong className="text-white">Fixed 10% MAX Protocol</strong>
+                        </div>
+                      </div>
+
+                      {/* Starting Balance */}
+                      <div className="space-y-2">
+                        <label className="text-xs font-mono text-zinc-300 font-semibold block">STARTING BALANCE (₱)</label>
+                        <input
+                          type="number"
+                          value={riskStartBal}
+                          onChange={(e) => setRiskStartBal(parseFloat(e.target.value) || 0)}
+                          className="w-full bg-[#15161e] border border-zinc-700 rounded-xl px-4 py-3 text-white font-mono font-bold"
+                        />
+                        <div className="grid grid-cols-4 gap-1.5 pt-1">
+                          {[5000, 10000, 25000, 50000].map((preset) => (
+                            <button
+                              key={preset}
+                              type="button"
+                              onClick={() => { setRiskStartBal(preset); setRiskCurrBal(preset); }}
+                              className="py-1 rounded-lg text-[11px] font-mono bg-[#15161e] text-zinc-400 hover:text-white border border-zinc-800 cursor-pointer"
+                            >
+                              ₱{(preset / 1000)}k
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Current Balance */}
+                      <div className="space-y-2">
+                        <label className="text-xs font-mono text-zinc-300 font-semibold block">CURRENT BALANCE (₱)</label>
+                        <input
+                          type="number"
+                          value={riskCurrBal}
+                          onChange={(e) => setRiskCurrBal(parseFloat(e.target.value) || 0)}
+                          className="w-full bg-[#15161e] border border-zinc-700 rounded-xl px-4 py-3 text-white font-mono font-bold"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Discipline Mandate Callout */}
+                    <div className="p-3.5 rounded-2xl bg-[#14120a] border border-amber-500/20 text-xs text-amber-200/90 leading-relaxed flex items-start gap-2.5">
+                      <AlertTriangle className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+                      <span>
+                        <strong>Discipline Rule:</strong> Strictly follow the account budget and RJS. Max 1 trade per session. Risk a Maximum of 10% of Starting Capital.
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Right Column Clearance Outputs */}
+                  <div className="lg:col-span-7 p-6 sm:p-8 rounded-3xl bg-[#0b0c10] border-2 border-zinc-700/80 shadow-2xl flex flex-col justify-between space-y-6">
+                    <div className="flex items-center justify-between pb-4 border-b border-zinc-800">
+                      <span className="font-mono text-xs uppercase text-emerald-400 font-bold flex items-center gap-1.5">
+                        <Target className="w-4 h-4" /> Execution Clearance Output
+                      </span>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-semibold">
+                        1:3 RRR ASYMMETRIC BIAS
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {/* Max Allowed Loss */}
+                      <div className="p-5 rounded-2xl bg-[#140d10] border border-rose-500/40">
+                        <span className="text-[11px] font-mono uppercase text-rose-300 font-semibold flex items-center gap-1.5">
+                          <ShieldAlert className="w-3.5 h-3.5 text-rose-400" /> MAX ALLOWED LOSS
+                        </span>
+                        <div className="text-3xl sm:text-4xl font-black font-mono text-rose-400 my-2">
+                          -{formatPHP(maxRiskLoss)}
+                        </div>
+                        <div className="text-xs font-mono font-bold text-rose-200 uppercase">
+                          MANDATORY STOP LOSS CEILING
+                        </div>
+                        <p className="text-[11px] text-rose-200/70 mt-3 pt-3 border-t border-rose-500/20">
+                          Strict loss cutoff. If hit, terminal closes immediately. Zero revenge trading.
+                        </p>
+                      </div>
+
+                      {/* Target 1:3 Profit */}
+                      <div className="p-5 rounded-2xl bg-[#091510] border border-emerald-500/40">
+                        <span className="text-[11px] font-mono uppercase text-emerald-300 font-semibold flex items-center gap-1.5">
+                          <TrendingUp className="w-3.5 h-3.5 text-emerald-400" /> TARGET 1:3 PROFIT
+                        </span>
+                        <div className="text-3xl sm:text-4xl font-black font-mono text-emerald-400 my-2">
+                          +{formatPHP(targetRiskProfit)}
+                        </div>
+                        <div className="text-xs font-mono font-bold text-emerald-200 uppercase">
+                          1:3 RRR TAKE PROFIT TARGET
+                        </div>
+                        <p className="text-[11px] text-emerald-200/70 mt-3 pt-3 border-t border-emerald-500/20">
+                          Exact profit objective to lock in before logging off.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Projected Balances */}
+                    <div className="p-5 rounded-2xl bg-[#111218] border border-zinc-700/90 space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-mono uppercase text-zinc-400 font-semibold">
+                          PROJECTED ACCOUNT BALANCES
+                        </span>
+                        <span className="text-[10px] font-mono text-zinc-500">
+                          Current: {formatPHP(riskCurrBal)}
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                        <div className="p-3.5 rounded-xl bg-[#191113] border border-rose-900/60 flex items-center justify-between">
+                          <div>
+                            <span className="text-[11px] font-mono text-zinc-400 block">If SL Hits:</span>
+                            <div className="text-lg font-bold font-mono text-rose-400">{formatPHP(projectedRiskSL)}</div>
+                          </div>
+                          <span className="text-[10px] font-mono px-2 py-1 rounded bg-rose-500/10 text-rose-400">
+                            -10%
+                          </span>
+                        </div>
+                        <div className="p-3.5 rounded-xl bg-[#0e1a14] border border-emerald-900/60 flex items-center justify-between">
+                          <div>
+                            <span className="text-[11px] font-mono text-zinc-400 block">If 1:3 TP Hits:</span>
+                            <div className="text-xl font-black font-mono text-emerald-400">{formatPHP(projectedRiskTP)}</div>
+                          </div>
+                          <span className="text-[10px] font-mono px-2 py-1 rounded bg-emerald-500/20 text-emerald-300 font-bold">
+                            +30%
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+            </section>
+
+            {/* WEEKLY FOREX FACTORY CLEARANCE SCHEDULE */}
+            <section className="py-20 border-t border-zinc-800/80 bg-[#0b0c10]/20">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                  <div>
+                    <span className="text-xs font-mono uppercase tracking-[0.25em] text-zinc-400">Forex Factory Clearance Protocol</span>
+                    <h2 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">
+                      Weekly Red-Folder Risk Schedule
+                    </h2>
+                    <p className="text-zinc-400 text-sm mt-2 max-w-xl">
+                      Every Sunday evening, the desk issues standard directives. Traders never guess whether a session is tradable or protected by a Stand Down order.
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3 font-mono text-xs text-zinc-400">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                      ✓ Tradable (1:3 RRR)
+                    </span>
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20">
+                      ! 1:1 BE Lock
+                    </span>
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-red-500/10 text-red-400 border border-red-500/20">
+                      ✕ Stand Down
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-3 font-mono text-xs">
+                  {[
+                    { day: 'MON', date: 'OCT 26', time: '10:00 PM PHT', event: 'US ISM Manufacturing PMI', impact: 'MEDIUM', status: 'TRADABLE', directive: 'Normal 9:30 PM execution. Maintain standard 1:3 RRR target.' },
+                    { day: 'TUE', date: 'OCT 27', time: '10:00 PM PHT', event: 'US CB Consumer Confidence', impact: 'MEDIUM', status: 'TRADABLE', directive: 'Clean structure expected. Standard 1 trade protocol.' },
+                    { day: 'WED', date: 'OCT 28', time: '8:15 PM PHT', event: 'US ADP Non-Farm Employment', impact: 'HIGH', status: 'TRADABLE', directive: 'News drops 75 mins prior to NY Open. Levels will be calibrated by 9:30 PM.' },
+                    { day: 'THU', date: 'OCT 29', time: '8:30 PM PHT', event: 'US Core PCE Price Index (Red Folder)', impact: 'HIGH', status: 'CAUTION', directive: 'Red folder release. Tighten SL, lock Breakeven at 1:1, or Stand Down.' },
+                    { day: 'FRI', date: 'OCT 30', time: '8:30 PM PHT', event: 'US Non-Farm Payrolls (NFP) & Unemployment', impact: 'HIGH', status: 'STAND_DOWN', directive: 'EXTREME VOLATILITY. Desk Stand Down mandated. Zero executions.' }
+                  ].map((item, idx) => (
+                    <div key={idx} className={`p-4 sm:p-5 rounded-2xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 ${
+                      item.status === 'STAND_DOWN' ? 'bg-[#150a0a] border-red-900/40' : item.status === 'CAUTION' ? 'bg-[#161208] border-amber-800/40' : 'bg-[#0b0c10] border-zinc-800'
+                    }`}>
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 text-center">
+                          <span className="block text-white font-bold text-sm">{item.day}</span>
+                          <span className="block text-[10px] text-zinc-500">{item.date}</span>
+                        </div>
+                        <div className="h-8 w-px bg-zinc-800 hidden sm:block"></div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-[11px] text-zinc-400">{item.time}</span>
+                            <span className={`text-[9px] px-1.5 py-0.5 rounded font-bold uppercase ${item.impact === 'HIGH' ? 'bg-red-500/20 text-red-400' : 'bg-amber-500/20 text-amber-300'}`}>
+                              {item.impact} IMPACT
+                            </span>
+                          </div>
+                          <h4 className="text-sm font-sans font-bold text-white mt-0.5">{item.event}</h4>
+                        </div>
+                      </div>
+                      <div className="flex flex-col sm:items-end w-full sm:w-auto">
+                        <span className={`inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold uppercase mb-1 ${
+                          item.status === 'STAND_DOWN' ? 'bg-red-500/10 text-red-400 border border-red-500/30' : item.status === 'CAUTION' ? 'bg-amber-500/10 text-amber-300 border border-amber-500/30' : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
+                        }`}>
+                          {item.status === 'STAND_DOWN' ? 'STAND DOWN / NO TRADE' : item.status === 'CAUTION' ? 'CAUTION: 1:1 TP / BE LOCK' : 'DESK TRADABLE (1:3 RRR)'}
+                        </span>
+                        <span className="text-[11px] text-zinc-400 font-sans">{item.directive}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+              </div>
+            </section>
+
+            {/* FAQ SECTION */}
+            <section id="faq" className="py-24 border-t border-zinc-800/80 bg-[#0b0c10]/30">
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div className="text-center mb-16">
+                  <span className="text-xs font-mono uppercase tracking-[0.25em] text-zinc-400">Questions Answered</span>
+                  <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-2">
+                    Frequently Asked Questions
+                  </h2>
+                  <p className="text-zinc-400 text-sm mt-2">Everything you need to know about our trading protocols and enrollment.</p>
+                </div>
+
+                <div className="space-y-4">
+                  {FAQS.map((faq, idx) => {
+                    const isOpen = openFaqIndex === idx;
+                    return (
+                      <div key={idx} className="rounded-2xl bg-[#0b0c10] border border-zinc-800 overflow-hidden">
+                        <button
+                          type="button"
+                          onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
+                          className="w-full p-6 text-left flex items-center justify-between text-base font-bold text-zinc-200 hover:text-white cursor-pointer"
+                        >
+                          <span className="pr-4">{faq.q}</span>
+                          <ChevronDown className={`w-5 h-5 text-zinc-400 transition-transform ${isOpen ? 'rotate-180 text-white' : ''}`} />
+                        </button>
+                        {isOpen && (
+                          <div className="px-6 pb-6 text-sm text-zinc-400 leading-relaxed border-t border-zinc-800/60 pt-4 font-sans">
+                            {faq.a}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+
+              </div>
+            </section>
+          </main>
+
+          {/* FOOTER */}
+          <footer className="py-12 border-t border-zinc-800/80 bg-[#050507] font-mono text-xs text-zinc-500">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex flex-col items-center md:items-start">
+                <span className="font-['Cinzel'] text-lg font-bold text-white tracking-widest">RYAN JADE</span>
+                <span className="text-[10px] tracking-wider text-zinc-600 mt-0.5">
+                  &copy; {new Date().getFullYear()} RYAN JADE TRADING DESK &bull; RJS PROTOCOL. ALL RIGHTS RESERVED.
+                </span>
+              </div>
+              <div className="flex flex-wrap justify-center items-center gap-6 text-zinc-400">
+                <a href="#protocol" className="hover:text-white transition-colors">Protocol</a>
+                <a href="#curriculum" className="hover:text-white transition-colors">Curriculum</a>
+                <a href="#audit" className="hover:text-white transition-colors">Student Audit</a>
+                <a href="#calculator" className="hover:text-white transition-colors">Risk Calculator</a>
+                <a href="#pricing" className="hover:text-white transition-colors">Pricing Options</a>
+                <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
+              </div>
+              <div className="text-[10px] text-zinc-600 text-center md:text-right max-w-xs">
+                Trading foreign exchange on margin carries high risk. Strict risk budgets and discipline are mandatory.
+              </div>
+            </div>
+          </footer>
+
+          {/* MODAL 1: PORTAL RESTRICTED MODAL (ON CURRICULUM CLICKS) */}
+          {isRestrictedModalOpen && (
+            <div
+              onClick={() => setIsRestrictedModalOpen(false)}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md px-4 py-8 animate-fadeIn"
+            >
+              <div
+                onClick={(e) => e.stopPropagation()}
+                className="w-full max-w-lg p-7 sm:p-9 rounded-3xl bg-[#0b0c10] border border-amber-500/40 text-zinc-100 shadow-[0_0_60px_rgba(245,158,11,0.22)] relative font-sans"
+              >
+                <button
+                  onClick={() => setIsRestrictedModalOpen(false)}
+                  className="absolute top-5 right-5 text-zinc-400 hover:text-white p-1.5 rounded-xl hover:bg-zinc-800"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+
+                <div className="flex items-center justify-center mb-5">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-amber-500/10 text-amber-300 border border-amber-500/30">
+                    <Lock className="w-3.5 h-3.5 text-amber-400" />
+                    <span>🔒 ENROLLED MEMBERS ONLY</span>
+                  </span>
+                </div>
+
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white text-center tracking-tight">
+                  {restrictedModalTitle ? `${restrictedModalTitle} - Video Locked` : 'Phase 1 Start & Rules - Video Locked'}
+                </h3>
+
+                <p className="text-zinc-300 text-sm sm:text-base text-center mt-4 leading-relaxed font-sans">
+                  Complete video breakdowns, operational rulebooks, secret single-word verification keys, and execution checklists are reserved strictly for active traders inside the private RJS Portal.
+                </p>
+
+                <div className="my-6 p-4 rounded-2xl bg-[#050608] border border-zinc-800 space-y-2.5 text-xs text-zinc-300 font-mono">
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-amber-400 font-bold">✓</span>
+                    <span>Immediate video stream &amp; proprietary POI formula access</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-amber-400 font-bold">✓</span>
+                    <span>Single-word verification passwords &amp; fillable module PDF</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-emerald-400 font-bold">✓</span>
+                    <span>Verified trader desk accreditation upon syllabus completion</span>
+                  </div>
+                </div>
+
+                <div className="space-y-3 font-mono text-xs sm:text-sm">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsRestrictedModalOpen(false);
+                      handleScrollTo('mentorship');
+                    }}
+                    className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-black font-extrabold uppercase tracking-wider cursor-pointer shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2"
+                  >
+                    <span>ENROLL IN FULL MENTORSHIP (₱10,000)</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsRestrictedModalOpen(false);
+                      handleScrollTo('standalone');
+                    }}
+                    className="w-full py-3 px-4 rounded-xl bg-[#12131a] hover:bg-[#181924] border border-zinc-700 text-zinc-100 hover:text-white font-bold uppercase tracking-wider cursor-pointer flex items-center justify-center gap-2"
+                  >
+                    <span>ACCESS STANDALONE VAULT (₱4,000)</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsRestrictedModalOpen(false)}
+                    className="w-full text-center text-xs text-zinc-500 hover:text-zinc-300 pt-2 cursor-pointer"
+                  >
+                    Return to Curriculum
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* MODAL 2: CLIENT PORTAL SIMULATOR MODAL */}
+          {isPortalModalOpen && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md px-4 overflow-y-auto py-8">
+              <div className="w-full max-w-4xl p-6 sm:p-8 rounded-3xl bg-[#0b0c10] border border-zinc-700 text-zinc-100 shadow-2xl relative font-sans">
+                
+                <button
+                  onClick={() => setIsPortalModalOpen(false)}
+                  className="absolute top-6 right-6 text-zinc-400 hover:text-white p-1.5 rounded-xl hover:bg-zinc-800"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-zinc-800 gap-3">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-mono tracking-widest uppercase px-2.5 py-1 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">
+                        CLIENT PORTAL SIMULATOR
+                      </span>
+                      <span className="text-xs font-mono text-amber-400 font-semibold flex items-center gap-1">
+                        <Lock className="w-3.5 h-3.5" /> DEMO AUDIT PREVIEW
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mt-2">Ryan Jade Student Vault &amp; Keyword Check</h3>
+                  </div>
+
+                  <div className="flex items-center gap-1 p-1 rounded-xl bg-[#111217] border border-zinc-800 font-mono text-xs">
+                    <button
+                      onClick={() => { setPortalPhase('P1'); setPortalActiveModNumber('01'); setPortalAlertMsg(''); }}
+                      className={`px-3 py-1.5 rounded-lg font-bold transition-all ${portalPhase === 'P1' ? 'bg-white text-black' : 'text-zinc-400 hover:text-white'}`}
+                    >
+                      PHASE 1
+                    </button>
+                    <button
+                      onClick={() => { setPortalPhase('P2'); setPortalActiveModNumber('01'); setPortalAlertMsg(''); }}
+                      className={`px-3 py-1.5 rounded-lg font-bold transition-all ${portalPhase === 'P2' ? 'bg-amber-400 text-black' : 'text-zinc-400 hover:text-white'}`}
+                    >
+                      PHASE 2
+                    </button>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
+                  {/* Left Sidebar (Lessons freely clickable) */}
+                  <div className="lg:col-span-4 space-y-2 font-mono text-xs max-h-[380px] overflow-y-auto pr-1">
+                    <span className="text-zinc-500 uppercase text-[11px] block mb-2 font-bold">Curriculum Modules</span>
+                    {activePortalModules.map((m) => {
+                      const isSelected = portalActiveModNumber === m.number;
+                      return (
+                        <button
+                          key={m.number}
+                          onClick={() => { setPortalActiveModNumber(m.number); setPortalAlertMsg(''); }}
+                          className={`w-full p-3 rounded-xl border text-left flex items-center justify-between transition-all cursor-pointer ${
+                            isSelected ? 'bg-[#171821] border-amber-400/80 text-white' : 'bg-[#111217] border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'
+                          }`}
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <span className="font-bold text-amber-400">{m.number}.</span>
+                            <span className="font-sans font-medium text-xs truncate max-w-[150px]">{m.title}</span>
+                          </div>
+                          <Lock className="w-3.5 h-3.5 text-amber-400/80" />
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Right Details Panel */}
+                  <div className="lg:col-span-8 p-6 rounded-2xl bg-[#111217] border border-zinc-800 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-mono text-amber-400 bg-amber-500/10 px-2.5 py-0.5 rounded border border-amber-500/20">
+                          {activePortalModule.duration}
+                        </span>
+                        <span className="text-xs font-mono text-amber-400/90 flex items-center gap-1">
+                          <Lock className="w-3 h-3 text-amber-400" /> Proprietary Masterclass Gated
+                        </span>
+                      </div>
+
+                      <h4 className="text-xl font-bold text-white mt-3">{activePortalModule.title}</h4>
+                      <p className="text-sm text-zinc-300 mt-2 leading-relaxed">
+                        {activePortalModule.summary}
+                      </p>
+
+                      {/* Video Player Card (Triggers Locked Overlay on Click) */}
+                      <div
+                        id="portal-play-btn"
+                        onClick={() => triggerPortalLocked(activePortalModule.title)}
+                        className="mt-5 p-6 rounded-2xl bg-[#0b0c10] border border-zinc-800 hover:border-amber-500/50 flex flex-col items-center justify-center text-center cursor-pointer group shadow-md"
+                      >
+                        <div className="relative mb-2 pointer-events-none">
+                          <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:scale-105 transition-transform border border-zinc-700">
+                            <Play className="w-6 h-6 fill-white ml-0.5 opacity-80" />
+                          </div>
+                          <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-amber-400 text-black flex items-center justify-center shadow-lg border border-black/50">
+                            <Lock className="w-3.5 h-3.5" />
+                          </div>
+                        </div>
+                        <span className="text-xs font-mono text-zinc-200 group-hover:text-white font-semibold">
+                          STREAM LESSON {activePortalModule.number}: {activePortalModule.title.toUpperCase()}
+                        </span>
+                        <span className="text-[11px] font-mono text-amber-400/90 mt-1 flex items-center gap-1">
+                          <Lock className="w-3 h-3 text-amber-400" /> Click to view enrollment clearance &bull; Verification key inside video
+                        </span>
+                      </div>
+
+                      {/* Keyword Input (Triggers Locked Overlay on Validate) */}
+                      <div className="mt-6 p-4 rounded-xl bg-[#050507] border border-zinc-800">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-xs font-mono text-zinc-300 font-bold flex items-center gap-1.5">
+                            <Key className="w-3.5 h-3.5 text-amber-400" />
+                            ENTER SECRET VERIFICATION KEYWORD
+                          </span>
+                        </div>
+                        <form onSubmit={handlePortalKeywordSubmit} className="flex gap-2">
+                          <input
+                            type="text"
+                            value={portalKeywordInput}
+                            onChange={(e) => setPortalKeywordInput(e.target.value)}
+                            placeholder="Enter secret verification keyword"
+                            className="flex-1 bg-[#111217] border border-zinc-700 rounded-xl px-3.5 py-2.5 font-mono text-xs text-white focus:outline-none focus:border-amber-400 uppercase tracking-wider"
+                          />
+                          <button
+                            id="portal-validate-btn"
+                            type="submit"
+                            className="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-bold text-xs uppercase font-mono tracking-wider cursor-pointer"
+                          >
+                            Validate
+                          </button>
+                        </form>
+
+                        {portalAlertMsg && (
+                          <div className="mt-3 p-3.5 rounded-xl text-xs font-mono bg-amber-500/10 border border-amber-500/30 text-amber-200 flex items-start gap-2.5">
+                            <AlertTriangle className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+                            <div>{portalAlertMsg}</div>
+                          </div>
+                        )}
+                      </div>
+
+                    </div>
+
+                    <div className="mt-6 pt-4 border-t border-zinc-800 flex items-center justify-between text-xs font-mono text-zinc-500">
+                      <span>Interactive Fillable PDF Worksheet Attached</span>
+                      <span className="text-amber-400 font-semibold flex items-center gap-1.5 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+                        <Lock className="w-3.5 h-3.5 text-amber-400" />
+                        <span>Status: Demo Preview / Locked</span>
+                      </span>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          )}
+
+          {/* SUB-MODAL: PROPRIETARY MASTERCLASS LOCKED (INSIDE PORTAL) */}
+          {isPortalLockedOverlayOpen && (
+            <div
+              onClick={() => setIsPortalLockedOverlayOpen(false)}
+              className="fixed inset-0 z-60 flex items-center justify-center bg-black/90 backdrop-blur-md px-4 py-8 animate-fadeIn"
+            >
+              <div
+                onClick={(e) => e.stopPropagation()}
+                className="w-full max-w-lg p-7 sm:p-9 rounded-3xl bg-[#0b0c10] border border-amber-500/40 text-zinc-100 shadow-[0_0_60px_rgba(245,158,11,0.25)] relative font-sans"
+              >
+                <button
+                  onClick={() => setIsPortalLockedOverlayOpen(false)}
+                  className="absolute top-5 right-5 text-zinc-400 hover:text-white p-1.5 rounded-xl hover:bg-zinc-800"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+
+                <div className="flex items-center justify-center mb-5">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-amber-500/10 text-amber-300 border border-amber-500/30">
+                    <Lock className="w-3.5 h-3.5 text-amber-400" />
+                    <span>🔒 PROPRIETARY MASTERCLASS LOCKED</span>
+                  </span>
+                </div>
+
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white text-center tracking-tight">
+                  {portalLockedTitle ? `${portalLockedTitle} - Enrolled Access Only` : 'Enrolled Access Only'}
+                </h3>
+
+                <p className="text-zinc-300 text-sm sm:text-base text-center mt-4 leading-relaxed font-sans">
+                  Full video walkthroughs, trade executions, execution checklists, and Ryan Jade's proprietary single-word verification keys are reserved exclusively for enrolled students.
+                </p>
+
+                <div className="my-6 p-4 rounded-2xl bg-[#050608] border border-zinc-800 space-y-2.5 text-xs text-zinc-300 font-mono">
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-amber-400 font-bold">✓</span>
+                    <span>Complete 1080p lesson walkthroughs &amp; step-by-step executions</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-amber-400 font-bold">✓</span>
+                    <span>Secret single-word verification passwords for portal audit sheets</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-emerald-400 font-bold">✓</span>
+                    <span>Direct daily desk markups &amp; 1-on-1 diagnostic review options</span>
+                  </div>
+                </div>
+
+                <div className="space-y-3 font-mono text-xs sm:text-sm">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsPortalLockedOverlayOpen(false);
+                      setIsPortalModalOpen(false);
+                      handleScrollTo('mentorship');
+                    }}
+                    className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-black font-extrabold uppercase tracking-wider cursor-pointer shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2"
+                  >
+                    <span>START FULL MENTORSHIP (₱10,000)</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsPortalLockedOverlayOpen(false);
+                      setIsPortalModalOpen(false);
+                      handleScrollTo('standalone');
+                    }}
+                    className="w-full py-3 px-4 rounded-xl bg-[#12131a] hover:bg-[#181924] border border-zinc-700 text-zinc-100 hover:text-white font-bold uppercase tracking-wider cursor-pointer flex items-center justify-center gap-2"
+                  >
+                    <span>GET STANDALONE VAULT (₱4,000)</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsPortalLockedOverlayOpen(false)}
+                    className="w-full text-center text-xs text-zinc-500 hover:text-zinc-300 pt-2 cursor-pointer"
+                  >
+                    Return to Portal Simulator
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* MODAL 3: DEMO AUDIT CAPACITY REACHED (3-TRADE CAP PAYWALL) */}
+          {isCapacityModalOpen && (
+            <div
+              onClick={() => setIsCapacityModalOpen(false)}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md px-4 py-8 animate-fadeIn"
+            >
+              <div
+                onClick={(e) => e.stopPropagation()}
+                className="w-full max-w-lg p-7 sm:p-9 rounded-3xl bg-[#0b0c10] border border-amber-500/40 text-zinc-100 shadow-[0_0_60px_rgba(245,158,11,0.2)] relative font-sans"
+              >
+                <button
+                  onClick={() => setIsCapacityModalOpen(false)}
+                  className="absolute top-5 right-5 text-zinc-400 hover:text-white p-1.5 rounded-xl hover:bg-zinc-800"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+
+                <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center mx-auto mb-4">
+                  <Lock className="w-7 h-7 text-amber-400" />
+                </div>
+
+                <div className="text-center font-mono text-[10px] uppercase tracking-widest text-amber-400 font-bold mb-1">
+                  STUDENT VAULT PAYWALL &bull; PUBLIC DEMO LIMIT
+                </div>
+
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white text-center tracking-tight">
+                  DEMO AUDIT CAPACITY REACHED
+                </h3>
+
+                <p className="text-zinc-300 text-sm sm:text-base text-center mt-4 leading-relaxed font-sans">
+                  You have completed your 3-trade public demo. The complete 20-Trade Execution Audit Journal, continuous equity curve calculation, and live daily review features are reserved exclusively for enrolled students.
+                </p>
+
+                <div className="my-6 p-4 rounded-2xl bg-[#050608] border border-zinc-800 space-y-2.5 text-xs text-zinc-300 font-sans">
+                  <div className="flex items-center gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                    <span>Full 20-Trade Fillable PDF Execution Journal &amp; Continuous Equity Math</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                    <span>Two 90-Min Private 1-on-1 Diagnostic Sessions with Ryan Jade</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                    <span>Unrestricted Phase 1 &amp; Phase 2 Video Masterclasses &amp; Clearances</span>
+                  </div>
+                </div>
+
+                <div className="space-y-3 font-mono text-xs sm:text-sm">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsCapacityModalOpen(false);
+                      handleScrollTo('mentorship');
+                    }}
+                    className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-black font-extrabold uppercase tracking-wider cursor-pointer shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2"
+                  >
+                    <span>ENROLL IN FULL MENTORSHIP (₱10,000)</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsCapacityModalOpen(false);
+                      handleScrollTo('standalone');
+                    }}
+                    className="w-full py-3 px-4 rounded-xl bg-[#12131a] hover:bg-[#181924] border border-zinc-700 text-zinc-100 hover:text-white font-bold uppercase tracking-wider cursor-pointer flex items-center justify-center gap-2"
+                  >
+                    <span>ACCESS STANDALONE VAULT (₱4,000)</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsCapacityModalOpen(false)}
+                    className="w-full text-center text-xs text-zinc-500 hover:text-zinc-300 pt-2 cursor-pointer"
+                  >
+                    &larr; Return to 3-Trade Demo Table
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+        </div>
+      );
+    }
+
+    // Render App
+    const rootElement = document.getElementById('root');
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(<App />);
+  </script>
+</body>
 </html>
